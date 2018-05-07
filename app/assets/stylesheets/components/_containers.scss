@@ -1,0 +1,61 @@
+.wrapper-home {
+  display: flex;
+}
+
+.container-actions-home {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  background: white;
+  transition: all 0.3s ease;
+  height:60vh;
+  width: 30%;
+  margin: 30px;
+  padding: 15px;
+}
+
+.container-actions-home-title {
+  text-align: center;
+}
+
+.container-actions-home-action {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.benchmark-content-home-project-title {
+  display: flex;
+  border-bottom-style: solid;
+  border-color: $light-gray;
+  h4 {
+    font-size: 18px;
+    color: $blue;
+  }
+}
+
+.benchmark-content-home-project-description {
+  width: 40%;
+  padding-right: 10px;
+}
+
+.benchmark-content-home-project-client {
+  width: 20%;
+  padding-right: 10px;
+}
+
+.benchmark-content-home-project-created {
+  width: 10%;
+  padding-right: 10px;
+}
+
+
+
+.container-content-benchmarks-home {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  background: white;
+  transition: all 0.3s ease;
+  height:100vh;
+  width: 70%;
+  margin: 30px;
+  padding: 15px;
+}
+
+

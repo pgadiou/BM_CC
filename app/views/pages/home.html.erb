@@ -1,2 +1,36 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="wrapper-home">
+  <div class="container-content-benchmarks-home">
+    <div class="benchmark-content-home-title">
+      <h3>Your projects</h3>
+
+    </div>
+
+    <div class="benchmark-content-home">
+      <div class="benchmark-content-home-project-title">
+        <div class="benchmark-content-home-project-description">
+          <h4>Project description</h4>
+        </div>
+        <div class="benchmark-content-home-project-client">
+          <h4>Client</h4>
+        </div>
+        <div class="benchmark-content-home-project-created">
+          <h4>Created on</h4>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="container-actions-home">
+    <div class="container-actions-home-title">
+      <h3>User action</h3>
+    </div>
+    <div class="container-actions-home-action">
+      <%= link_to "Create project", new_project_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+</div>
+

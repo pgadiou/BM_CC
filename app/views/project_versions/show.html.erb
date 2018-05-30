@@ -1,0 +1,105 @@
+<div class="container-nav-buttons">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <button type="button" class="btn btn-primary">Versions</button>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <button type="button" class="btn btn-primary">Financial criteria</button>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <button type="button" class="btn btn-secondary">Trade description review</button>
+        <button type="button" class="btn btn-secondary">Internet review</button>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+      <button type="button" class="btn btn-secondary">Results</button>
+      </div>
+    </div>
+  </div>
+
+ <!-- project version -->
+<div class="wrapper-project-versions">
+
+  <div class="container-content-project-versions">
+    <div class="project-version-content-title">
+      <h3>Project version</h3>
+    </div>
+
+    <div class="project-version-content-detail">
+      <div class="project-version-content-detail-title">
+        <div class="project-version-content-detail-description">
+          <h4>Project description</h4>
+        </div>
+        <div class="project-version-content-detail-period">
+          <h4>Period</h4>
+        </div>
+        <div class="project-version-content-detail-created">
+          <h4>Created on</h4>
+        </div>
+      </div>
+
+      <div class="project-version-content-detail-current">
+        <div class="project-version-content-detail-description">
+          <p><%=@project_version.description%></p>
+        </div>
+        <div class="project-version-content-detail-period">
+          <p><%=@project_version.project.client%></p>
+        </div>
+        <div class="project-version-content-detail-created">
+          <p><%=@project_version.created_at.strftime('%F')%></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-version-content-actions">
+      <%=form_tag import_project_version_companies_path(@project_version), multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import Excel"%>
+      <% end %>
+    </div>
+
+    <div class="project-version-content-actions">
+      <div class="btn-group" role="group" aria-label="First group">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">Create new version</button>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <button type="button" class="btn btn-primary">Select other version</button>
+      </div>
+    </div>
+  </div>
+
+    <div class="container-actions-home">
+    <div class="container-actions-home-title">
+      <h3>User action</h3>
+    </div>
+    <div class="container-actions-home-action">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
+       Create project
+      </button>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- modal create version -->
+
+<div class="modal fade" id="newProjectVersionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for (@new_project_version) do |f| %>
+        <div class="modal-body">
+          <%= f.input :description, label: 'Version Description', required: true%>
+          <%= f.hidden_field :project_id, :value=> @project_version.project_id %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Ajouter", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

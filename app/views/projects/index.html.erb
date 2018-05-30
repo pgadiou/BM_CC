@@ -1,0 +1,76 @@
+<div class="wrapper-home">
+  <div class="container-content-benchmarks-home">
+    <div class="benchmark-content-home-title">
+      <h3>All projects</h3>
+
+    </div>
+
+    <div class="benchmark-content-home">
+      <div class="benchmark-content-home-project-title">
+        <div class="benchmark-content-home-project-description">
+          <h4>Project description</h4>
+        </div>
+        <div class="benchmark-content-home-project-client">
+          <h4>Client</h4>
+        </div>
+        <div class="benchmark-content-home-project-created">
+          <h4>Created on</h4>
+        </div>
+      </div>
+
+      <% @projects.each do |project| %>
+
+        <%= link_to project_version_path(project.project_versions.last) do %>
+          <div class="benchmark-content-home-project-instance">
+            <div class="benchmark-content-home-project-description">
+              <p><%=project.description%></p>
+            </div>
+            <div class="benchmark-content-home-project-client">
+              <p><%=project.client%></p>
+            </div>
+            <div class="benchmark-content-home-project-created">
+              <p><%=project.created_at.strftime('%F')%></p>
+            </div>
+          </div>
+        <% end %>
+
+      <% end %>
+
+    </div>
+
+
+  </div>
+
+  <div class="container-actions-home">
+    <div class="container-actions-home-title">
+      <h3>User action</h3>
+    </div>
+    <div class="container-actions-home-action">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectModal">
+       Create project
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for (@project) do |f| %>
+        <div class="modal-body">
+          <%= f.input :client, label: 'Client', required: true%>
+          <%= f.input :description, label: 'Project Description', required: true%>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Ajouter", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

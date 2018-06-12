@@ -6,6 +6,9 @@ class ProjectVersionsController < ApplicationController
   def show
     @project_version = ProjectVersion.find(params[:id])
     @new_project_version = ProjectVersion.new
+    @project = @project_version.project
+    @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true)
+    @unset_companies = Company.where(project_version_id: @project_version.id, unset: true)
   end
 
   def create
@@ -13,7 +16,6 @@ class ProjectVersionsController < ApplicationController
     if @new_project_version.save
       redirect_to project_version_path(@new_project_version)
     else
-      cha
       redirect_to root_path
     end
   end

@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  belongs_to :project
+  belongs_to :project_version
 
   require 'csv'
 
@@ -8,10 +8,14 @@ class Company < ApplicationRecord
     header = spreadsheet.row(2)
     (3..spreadsheet.last_row).each do |i|
       row=Hash[[header,spreadsheet.row(i)].transpose]
-      company = find_by_id(row["id"])||new
-      company.project_version_id = project_version_id.to_i
-      company.attributes = row.to_hash
-      company.save!
+      unless Company.exists?(project_version_id: project_version_id.to_i, "BvD ID number": row["BvD ID number"])
+        company = Company.new
+        company.project_version_id = project_version_id.to_i
+        company.attributes = row.to_hash.slice(*Company.attribute_names)
+        company.trade_description_en = row.to_hash["Trade description (English)"]
+        company.trade_description_original = row.to_hash["Trade description (original language)"]
+        company.save!
+      end
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514154731) do
+ActiveRecord::Schema.define(version: 20180612103026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,31 @@ ActiveRecord::Schema.define(version: 20180514154731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_version_id"
+    t.string "Company name"
+    t.string "Address"
+    t.string "Website"
+    t.string "Country"
+    t.string "City"
+    t.string "BvD ID number"
+    t.string "NACE / NAF code"
+    t.string "trade_description_en"
+    t.string "trade_description_original"
+    t.integer "Turnover 2011"
+    t.integer "Turnover 2012"
+    t.integer "Turnover 2013"
+    t.integer "EBIT 2011"
+    t.integer "EBIT 2012"
+    t.integer "EBIT 2013"
+    t.decimal "ros_1"
+    t.decimal "ros_2"
+    t.decimal "ros_3"
+    t.decimal "ros_avg"
+    t.decimal "fcmu_1"
+    t.decimal "fcmu_2"
+    t.decimal "fcmu_3"
+    t.decimal "fcmu_avg"
+    t.boolean "accepted"
+    t.boolean "unset", default: true
     t.index ["project_version_id"], name: "index_companies_on_project_version_id"
   end
 

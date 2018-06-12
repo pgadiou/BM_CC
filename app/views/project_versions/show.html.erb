@@ -1,17 +1,22 @@
 <div class="container-nav-buttons">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
-        <button type="button" class="btn btn-primary" onclick="showTab('versions')">Versions</button>
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'versions'), :method => :put, class: 'btn' %>
+        <%= form_tag project_version_mark_open_tab_path(@project_version), method: :put do %>
+          <%= hidden_field_tag :open_tab, 'versions' %>
+          <%= submit_tag 'Versions' %>
+        <%- end %>
+        <button type="button" class="btn btn-tab btn-primary" onclick="showTab('versions')">Versions</button>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <button type="button" class="btn btn-primary" onclick="showTab('financial-criteria')">Financial criteria</button>
+        <button type="button" class="btn btn-tab" onclick="showTab('financial-criteria')">Financial criteria</button>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Third group">
-        <button type="button" class="btn btn-secondary" onclick="showTab('versions')">Trade description review</button>
-        <button type="button" class="btn btn-secondary" onclick="showTab('versions')">Internet review</button>
+        <button type="button" class="btn btn-tab" onclick="showTab('versions')">Trade description review</button>
+        <button type="button" class="btn btn-tab" onclick="showTab('versions')">Internet review</button>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
-      <button type="button" class="btn btn-secondary">Results</button>
+      <button type="button" class="btn btn-tab">Results</button>
       </div>
     </div>
   </div>
@@ -90,6 +95,13 @@
     <div class="container-actions-project-versions-title">
       <h4>Financial results</h4>
     </div>
+    <div class="container-actions-project-versions-results">
+      <p>Min: <%=@project_version.companies.count%></p>
+      <p>Q1: <%=@unset_companies.count%></p>
+      <p>Median: <%=@accepted_companies.count%></p>
+      <p>Q3: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      <p>Max:</p>
+    </div>
     <div class="container-actions-project-versions-action">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
        Create project
@@ -114,68 +126,80 @@
           <h4>BvD ID</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover 2013</h4>
+          <h4>Turnover <br> 2013</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover 2012</h4>
+          <h4>Turnover <br> 2012</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover 2011</h4>
+          <h4>Turnover <br> 2011</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2013</h4>
+          <h4>EBIT <br> 2013</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2012</h4>
+          <h4>EBIT <br> 2012</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2011</h4>
+          <h4>EBIT <br> 2011</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2013</h4>
+          <h4>ROS <br> 2013</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2012</h4>
+          <h4>ROS <br> 2012</h4>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2011</h4>
+          <h4>ROS <br> 2011</h4>
+        </div>
+        <div class="companies-financial-criteria-content-detail-financials">
+          <h4>ROS <br> W/A</h4>
         </div>
       </div>
 
       <%@project_version.companies.each do |company|%>
-      <div class="project-version-content-detail-current">
+      <div class="companies-financial-criteria-content-detail-current">
         <div class="companies-financial-criteria-content-detail-name">
-          <h4><%=company["Company name"]%></h4>
+          <p><%=company["Company name"]%></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4><%=company["Company name"]%></h4>
+          <p><%=company["BvD ID number"]%></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4><%=company["Turnover 2013"]%></h4>
+          <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover 2012</h4>
+          <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover 2011</h4>
+          <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2013</h4>
+          <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2012</h4>
+          <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT 2011</h4>
+          <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2013</h4>
+          <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
+            <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
+          <% end %>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2012</h4>
+          <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
+            <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
+          <% end %>
         </div>
         <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS 2011</h4>
+          <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
+            <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          <% end %>
+        </div>
+        <div class="companies-financial-criteria-content-detail-financials">
+          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
         </div>
       </div>
       <% end %>
@@ -184,16 +208,16 @@
 
   <div class="container-actions-project-versions">
     <div class="container-actions-project-versions-title">
-      <h4>Companies Selection</h4>
+      <h3>Companies Selection</h3>
     </div>
     <div class="container-actions-project-versions-results">
       <p>Total number of companies: <%=@project_version.companies.count%></p>
-      <p>Unset companies: <%=@unset_companies.count%></p>
-      <p>Accepted companies: <%=@accepted_companies.count%></p>
-      <p>Rejected companies: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      <p>Unset: <%=@unset_companies.count%></p>
+      <p>Accepted: <%=@accepted_companies.count%></p>
+      <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
     </div>
     <div class="container-actions-project-versions-title">
-      <h4>Financial results</h4>
+      <h3>Financial results</h3>
     </div>
     <div class="container-actions-project-versions-action">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
@@ -246,6 +270,12 @@
         for (y = 0; y < x.length; y++) {
           x[y].classList.add("hidden");
         }
+        var a = document.getElementsByClassName("btn-tab")
+        var b
+        for (b = 0; b < a.length; b++) {
+          a[b].classList.remove("btn-primary");
+        }
         document.getElementById(i).classList.remove("hidden")
+        event.target.classList.add("btn-primary")
       }
   </script>

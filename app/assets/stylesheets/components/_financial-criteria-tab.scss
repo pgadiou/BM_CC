@@ -1,0 +1,66 @@
+.container-content-companies-financial-criteria {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  background: white;
+  transition: all 0.3s ease;
+  height:100vh;
+  width: 100%;
+  margin: 30px;
+  padding: 15px;
+}
+
+
+.companies-financial-criteria-content-detail-title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  h3 {color: $wagon-gray;
+  font-size: 24px;}
+}
+
+.companies-financial-criteria-content-detail-title {
+  display: flex;
+  border-bottom-style: solid;
+  border-color: $light-gray;
+  h4 {
+    font-size: 16px;
+    color: $blue;
+  }
+}
+
+.companies-financial-criteria-content-detail-current {
+  display: flex;
+  border-bottom-style: solid;
+  border-color: $light-gray;
+  margin-bottom: 20px;
+  h4 {
+    font-size: 18px;
+    color: $blue;
+  }
+}
+
+.companies-financial-criteria-content-detail-name {
+  width: 40%;
+  padding-right: 10px;
+  p {
+    font-size: 14px;
+    color: $gray;
+  }
+}
+
+.companies-financial-criteria-content-detail-financials {
+  width: 30%;
+  padding-right: 10px;
+  text-align: center;
+  p {
+    font-size: 14px;
+    color: $gray;
+  }
+}
+
+.companies-financial-criteria-content-detail-created {
+  width: 30%;
+  padding-right: 10px;
+}
+
+.companies-financial-criteria-content-actions {
+  padding-top: 30px;
+}

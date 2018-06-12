@@ -20,6 +20,12 @@ class ProjectVersionsController < ApplicationController
     end
   end
 
+  def mark_open_tab
+    @project_version = ProjectVersion.find(params[:project_version_id])
+    @project_version.update_attributes(open_tab: params[:open_tab])
+    redirect_to @project_version
+  end
+
   private
 
   def project_version_params

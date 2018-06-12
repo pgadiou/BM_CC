@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'projects#index'
   resources :projects
   resources :project_versions do
+    put :mark_open_tab
     resources :companies do
       collection do
         post :import

@@ -1,233 +1,601 @@
-<div class="container-nav-buttons">
+
+<% case @project_version.open_tab %>
+<% when "Versions" || nil %>
+
+  <div class="container-nav-buttons">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
-        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'versions'), :method => :put, class: 'btn' %>
-        <%= form_tag project_version_mark_open_tab_path(@project_version), method: :put do %>
-          <%= hidden_field_tag :open_tab, 'versions' %>
-          <%= submit_tag 'Versions' %>
-        <%- end %>
-        <button type="button" class="btn btn-tab btn-primary" onclick="showTab('versions')">Versions</button>
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-primary' %>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <button type="button" class="btn btn-tab" onclick="showTab('financial-criteria')">Financial criteria</button>
+        <%= button_to "Financial criteria", project_version_mark_open_tab_path(@project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn' %>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Third group">
-        <button type="button" class="btn btn-tab" onclick="showTab('versions')">Trade description review</button>
-        <button type="button" class="btn btn-tab" onclick="showTab('versions')">Internet review</button>
+        <%= button_to "Trade description review", project_version_mark_open_tab_path(@project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn' %>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
-      <button type="button" class="btn btn-tab">Results</button>
+        <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
       </div>
     </div>
   </div>
 
- <!-- project version -->
-<div class="wrapper-project-versions" id="versions">
+  <!-- project version -->
+  <div class="wrapper-project-versions" id="versions">
 
-  <div class="container-content-project-versions">
-    <div class="project-version-content-title">
-      <h3><%=@project.description%></h3>
-    </div>
+    <div class="container-content-project-versions">
 
-    <div class="project-version-content-detail">
-      <div class="project-version-content-detail-title">
-        <div class="project-version-content-detail-description">
-          <h4>Version name</h4>
+      <div class="project-version-content-detail">
+        <div class="project-version-content-detail-title">
+          <div class="project-version-content-detail-description">
+            <h4>Version name</h4>
+          </div>
+          <div class="project-version-content-detail-period">
+            <h4>Years analyzed</h4>
+          </div>
+          <div class="project-version-content-detail-created">
+            <h4>Created on</h4>
+          </div>
         </div>
-        <div class="project-version-content-detail-period">
-          <h4>Years analyzed</h4>
-        </div>
-        <div class="project-version-content-detail-created">
-          <h4>Created on</h4>
+
+        <div class="project-version-content-detail-current">
+          <div class="project-version-content-detail-description">
+            <p><%=@project_version.description%></p>
+          </div>
+          <div class="project-version-content-detail-period">
+            <p><%=@project_version.project.client%></p>
+          </div>
+          <div class="project-version-content-detail-created">
+            <p><%=@project_version.created_at.strftime('%F')%></p>
+          </div>
         </div>
       </div>
 
-      <div class="project-version-content-detail-current">
-        <div class="project-version-content-detail-description">
-          <p><%=@project_version.description%></p>
-        </div>
-        <div class="project-version-content-detail-period">
-          <p><%=@project_version.project.client%></p>
-        </div>
-        <div class="project-version-content-detail-created">
-          <p><%=@project_version.created_at.strftime('%F')%></p>
-        </div>
+      <div class="new-item-link" id="new-excel-open" onclick="showAddFeature('new-excel', 'new-excel-open')">
+        <a><i class="fa fa-plus-circle icon-left"></i>  Import new excel</p></a>
       </div>
-    </div>
 
-    <div class="new-item-link" id="new-excel-open" onclick="showAddFeature('new-excel', 'new-excel-open')">
-      <a><i class="fa fa-plus-circle icon-left"></i>  Import new excel</p></a>
-    </div>
+      <div class= "hidden" id="new-excel">
+        <div class="new-item-link" id="new-excel-close" onclick="hideAddFeature('new-excel-open', 'new-excel')">
+          <a><i class="fa fa-minus-circle icon-left"></i>  Import new excel</p></a>
+        </div>
 
-    <div class= "hidden" id="new-excel">
-      <div class="new-item-link" id="new-excel-close" onclick="hideAddFeature('new-excel-open', 'new-excel')">
-        <a><i class="fa fa-minus-circle icon-left"></i>  Import new excel</p></a>
+        <div class="project-version-content-actions">
+          <%=form_tag import_project_version_companies_path(@project_version), multipart: true do %>
+            <%= file_field_tag :file %>
+            <%= submit_tag "Import Excel"%>
+          <% end %>
+        </div>
       </div>
 
       <div class="project-version-content-actions">
-        <%=form_tag import_project_version_companies_path(@project_version), multipart: true do %>
-          <%= file_field_tag :file %>
-          <%= submit_tag "Import Excel"%>
+        <div class="btn-group" role="group" aria-label="First group">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">Create new version</button>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-primary">Select other version</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-actions-project-versions">
+      <div class="container-actions-project-versions-title">
+        <h3>Companies Selection</h4>
+      </div>
+      <div class="container-actions-project-versions-results">
+        <p>Total number of companies: <%=@project_version.companies.count%></p>
+        <p>Unset companies: <%=@unset_companies.count%></p>
+        <p>Accepted companies: <%=@accepted_companies.count%></p>
+        <p>Rejected companies: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      </div>
+      <div class="container-actions-project-versions-title">
+        <h3>Financial results</h4>
+      </div>
+      <div class="container-actions-project-versions-results">
+        <p>Min: <%=@project_version.companies.count%></p>
+        <p>Q1: <%=@unset_companies.count%></p>
+        <p>Median: <%=@accepted_companies.count%></p>
+        <p>Q3: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+        <p>Max:</p>
+      </div>
+      <div class="container-actions-project-versions-action">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
+         Create project
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+<% when "Financial criteria" %>
+
+  <div class="container-nav-buttons">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'Versions'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <%= button_to "Financial criteria", project_version_mark_open_tab_path(@project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-primary' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <%= button_to "Trade description review", project_version_mark_open_tab_path(@project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+        <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial criteria -->
+  <div class="wrapper-project-versions" id="financial-criteria">
+
+    <div class="container-content-companies-financial-criteria">
+
+      <div class="companies-financial-criteria-content-detail">
+        <div class="companies-financial-criteria-content-detail-title">
+          <div class="companies-financial-criteria-content-detail-name">
+            <h4>Company</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>BvD ID</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> W/A</h4>
+          </div>
+        </div>
+
+        <%@project_version.companies.each do |company|%>
+
+          <% unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group %>
+
+            <div class="companies-financial-criteria-content-detail-current">
+              <div class="companies-financial-criteria-content-detail-name">
+                <p><%=company["Company name"]%></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=company["BvD ID number"]%></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+              </div>
+            </div>
+
+          <% else %>
+
+            <div class="companies-financial-criteria-content-detail-current-rejected">
+              <div class="companies-financial-criteria-content-detail-name">
+                <p><%=company["Company name"]%></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=company["BvD ID number"]%></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
+                  <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+              </div>
+            </div>
+
+          <% end %>
+
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="container-actions-financial-criteria">
+      <div class="container-actions-financial-criteria-title">
+        <h3>Companies Selection</h3>
+      </div>
+      <div class="container-actions-financial-criteria-results">
+        <p>Total number of companies: <%=@project_version.companies.count%></p>
+        <p>Unset: <%=@unset_companies.count%></p>
+        <p>Accepted: <%=@accepted_companies.count%></p>
+        <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      </div>
+      <div class="container-actions-financial-criteria-title">
+        <h3>Financial filters</h3>
+      </div>
+      <div class="container-actions-financial-criteria-filters-wrapper">
+        <%@financial_filters.each do |financial_filter|%>
+          <div class="container-actions-financial-criteria-filters">
+            <% if financial_filter.three_years %>
+              <%=financial_filter.description%>(all three years)
+            <% else %>
+              <%=financial_filter.description%>(two years)
+            <% end %>
+            <%= button_to financial_filter, class: "icon-button-filter", method: :delete do%>
+              <i class="fa fa-times"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="container-actions-financial-criteria-action">
+        <%= simple_form_for(@new_financial_filter) do |f| %>
+          <%= f.hidden_field :description, :value=> 'losses' %>
+          <%= f.hidden_field :project_version_id, :value=> @project_version.id %>
+          <%= f.input :three_years, as: :radio_buttons, collection: [[true, 'three-years'], [false, 'two-consecutive-years']], label_method: :second, value_method: :first, label: :'losses filter' %>
+          <%= f.submit "Apply losses filter", class: "btn btn-primary" %>
+      <% end %>
+      </div>
+    </div>
+
+  </div>
+
+
+<% when "Trade description review" %>
+
+  <div class="container-nav-buttons">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'Versions'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <%= button_to "Financial criteria", project_version_mark_open_tab_path(@project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <%= button_to "Trade description review", project_version_mark_open_tab_path(@project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-primary' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+        <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trade description review -->
+  <div class="wrapper-project-versions" id="financial-criteria">
+
+    <div class="container-content-companies-financial-criteria">
+
+      <div class="companies-financial-criteria-content-detail">
+        <div class="companies-financial-criteria-content-detail-title">
+          <div class="companies-financial-criteria-content-detail-name">
+            <h4>Company</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>BvD ID</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> W/A</h4>
+          </div>
+        </div>
+
+        <%@project_version.companies.each do |company|%>
+        <div class="companies-financial-criteria-content-detail-current">
+          <div class="companies-financial-criteria-content-detail-name">
+            <p><%=company["Company name"]%></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=company["BvD ID number"]%></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          </div>
+        </div>
         <% end %>
       </div>
     </div>
 
-    <div class="project-version-content-actions">
+    <div class="container-actions-project-versions">
+      <div class="container-actions-project-versions-title">
+        <h3>Companies Selection</h3>
+      </div>
+      <div class="container-actions-project-versions-results">
+        <p>Total number of companies: <%=@project_version.companies.count%></p>
+        <p>Unset: <%=@unset_companies.count%></p>
+        <p>Accepted: <%=@accepted_companies.count%></p>
+        <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      </div>
+      <div class="container-actions-project-versions-title">
+        <h3>Financial results</h3>
+      </div>
+      <div class="container-actions-project-versions-action">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
+         Create project
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+<% when "Internet review" %>
+
+  <div class="container-nav-buttons">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       <div class="btn-group" role="group" aria-label="First group">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">Create new version</button>
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'Versions'), :method => :put, class: 'btn' %>
       </div>
       <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <button type="button" class="btn btn-primary">Select other version</button>
+        <%= button_to "Financial criteria", project_version_mark_open_tab_path(@project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <%= button_to "Trade description review", project_version_mark_open_tab_path(@project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+        <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-primary' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn' %>
       </div>
     </div>
   </div>
 
-  <div class="container-actions-project-versions">
-    <div class="container-actions-project-versions-title">
-      <h4>Companies Selection</h4>
-    </div>
-    <div class="container-actions-project-versions-results">
-      <p>Total number of companies: <%=@project_version.companies.count%></p>
-      <p>Unset companies: <%=@unset_companies.count%></p>
-      <p>Accepted companies: <%=@accepted_companies.count%></p>
-      <p>Rejected companies: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
-    </div>
-    <div class="container-actions-project-versions-title">
-      <h4>Financial results</h4>
-    </div>
-    <div class="container-actions-project-versions-results">
-      <p>Min: <%=@project_version.companies.count%></p>
-      <p>Q1: <%=@unset_companies.count%></p>
-      <p>Median: <%=@accepted_companies.count%></p>
-      <p>Q3: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
-      <p>Max:</p>
-    </div>
-    <div class="container-actions-project-versions-action">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
-       Create project
-      </button>
-    </div>
-  </div>
+  <!-- Financial criteria -->
+  <div class="wrapper-project-versions" id="financial-criteria">
 
+    <div class="container-content-companies-financial-criteria">
 
-</div>
+      <div class="companies-financial-criteria-content-detail">
+        <div class="companies-financial-criteria-content-detail-title">
+          <div class="companies-financial-criteria-content-detail-name">
+            <h4>Company</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>BvD ID</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Turnover <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>EBIT <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2013</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2012</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> 2011</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>ROS <br> W/A</h4>
+          </div>
+        </div>
 
-<!-- Financial criteria -->
-<div class="wrapper-project-versions hidden" id="financial-criteria">
-
-  <div class="container-content-companies-financial-criteria">
-
-    <div class="companies-financial-criteria-content-detail">
-      <div class="companies-financial-criteria-content-detail-title">
-        <div class="companies-financial-criteria-content-detail-name">
-          <h4>Company</h4>
+        <%@project_version.companies.each do |company|%>
+        <div class="companies-financial-criteria-content-detail-current">
+          <div class="companies-financial-criteria-content-detail-name">
+            <p><%=company["Company name"]%></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=company["BvD ID number"]%></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
+              <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+            <% end %>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          </div>
         </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>BvD ID</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover <br> 2013</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover <br> 2012</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>Turnover <br> 2011</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT <br> 2013</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT <br> 2012</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>EBIT <br> 2011</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS <br> 2013</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS <br> 2012</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS <br> 2011</h4>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <h4>ROS <br> W/A</h4>
-        </div>
+        <% end %>
       </div>
+    </div>
 
-      <%@project_version.companies.each do |company|%>
-      <div class="companies-financial-criteria-content-detail-current">
-        <div class="companies-financial-criteria-content-detail-name">
-          <p><%=company["Company name"]%></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=company["BvD ID number"]%></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
-            <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
-          <% end %>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
-            <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
-          <% end %>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
-            <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-          <% end %>
-        </div>
-        <div class="companies-financial-criteria-content-detail-financials">
-          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-        </div>
+    <div class="container-actions-project-versions">
+      <div class="container-actions-project-versions-title">
+        <h3>Companies Selection</h3>
       </div>
-      <% end %>
+      <div class="container-actions-project-versions-results">
+        <p>Total number of companies: <%=@project_version.companies.count%></p>
+        <p>Unset: <%=@unset_companies.count%></p>
+        <p>Accepted: <%=@accepted_companies.count%></p>
+        <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
+      </div>
+      <div class="container-actions-project-versions-title">
+        <h3>Financial results</h3>
+      </div>
+      <div class="container-actions-project-versions-action">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
+         Create project
+        </button>
+      </div>
     </div>
+
   </div>
 
-  <div class="container-actions-project-versions">
-    <div class="container-actions-project-versions-title">
-      <h3>Companies Selection</h3>
-    </div>
-    <div class="container-actions-project-versions-results">
-      <p>Total number of companies: <%=@project_version.companies.count%></p>
-      <p>Unset: <%=@unset_companies.count%></p>
-      <p>Accepted: <%=@accepted_companies.count%></p>
-      <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
-    </div>
-    <div class="container-actions-project-versions-title">
-      <h3>Financial results</h3>
-    </div>
-    <div class="container-actions-project-versions-action">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
-       Create project
-      </button>
-    </div>
-  </div>
-
-
-</div>
+<% end %>
 
 <!-- modal create version -->
 

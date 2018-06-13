@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'projects#index'
   resources :projects
+  resources :financial_filters
   resources :project_versions do
     put :mark_open_tab
     resources :companies do

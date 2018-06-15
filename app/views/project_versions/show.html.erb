@@ -174,9 +174,18 @@
           <div class="companies-financial-criteria-content-detail-financials">
             <h4>ROS <br> W/A</h4>
           </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Rejected <br> Losses</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Rejected <br> Lack data</h4>
+          </div>
+          <div class="companies-financial-criteria-content-detail-financials">
+            <h4>Rejected <br> Turnover</h4>
+          </div>
         </div>
 
-        <%@project_version.companies.each do |company|%>
+        <%@project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
 
           <% unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group %>
 
@@ -222,6 +231,21 @@
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
                 <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.losses == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.lack_financials == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.turnover == true %>
+                  <p>x</p>
+                <% end %>
               </div>
             </div>
 
@@ -270,6 +294,21 @@
               <div class="companies-financial-criteria-content-detail-financials">
                 <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
               </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.losses == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.lack_financials == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <% if company.turnover == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
             </div>
 
           <% end %>
@@ -296,9 +335,9 @@
         <%@financial_filters.each do |financial_filter|%>
           <div class="container-actions-financial-criteria-filters">
             <% if financial_filter.three_years %>
-              <%=financial_filter.description%>(all three years)
+              <%=financial_filter.description%> (all three years)
             <% else %>
-              <%=financial_filter.description%>(two years)
+              <%=financial_filter.description%> (two years)
             <% end %>
             <%= button_to financial_filter, class: "icon-button-filter", method: :delete do%>
               <i class="fa fa-times"></i>
@@ -307,12 +346,35 @@
         <% end %>
       </div>
       <div class="container-actions-financial-criteria-action">
-        <%= simple_form_for(@new_financial_filter) do |f| %>
-          <%= f.hidden_field :description, :value=> 'losses' %>
-          <%= f.hidden_field :project_version_id, :value=> @project_version.id %>
-          <%= f.input :three_years, as: :radio_buttons, collection: [[true, 'three-years'], [false, 'two-consecutive-years']], label_method: :second, value_method: :first, label: :'losses filter' %>
-          <%= f.submit "Apply losses filter", class: "btn btn-primary" %>
-      <% end %>
+        <div class="container-actions-financial-criteria-form-wrapper">
+
+          <%= simple_form_for(@new_financial_filter) do |f| %>
+            <%= f.hidden_field :description, :value=> 'losses' %>
+            <%= f.hidden_field :project_version_id, :value=> @project_version.id %>
+            <%= f.input :three_years, as: :radio_buttons, collection: [[true, 'no losses'], [false, 'no losses in 2 consecutive years']], label_method: :second, value_method: :first, label: :'losses filter' %>
+            <%= f.submit "Apply losses filter", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+
+        <div class="container-actions-financial-criteria-form-wrapper">
+          <%= simple_form_for(@new_financial_filter) do |f| %>
+            <%= f.hidden_field :description, :value=> 'data availability' %>
+            <%= f.hidden_field :project_version_id, :value=> @project_version.id %>
+            <%= f.input :three_years, as: :radio_buttons, collection: [[true, 'all 3 years'], [false, 'at least 2 years']], label_method: :second, value_method: :first, label: :'data availability' %>
+            <%= f.submit "Apply data availability filter", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+
+        <div class="container-actions-financial-criteria-form-wrapper">
+          <%= simple_form_for(@new_financial_filter) do |f| %>
+            <%= f.hidden_field :description, :value=> 'turnover' %>
+            <%= f.hidden_field :project_version_id, :value=> @project_version.id %>
+            <%= f.input :three_years, as: :radio_buttons, collection: [[true, 'all 3 years'], [false, 'at least 2 years']], label_method: :second, value_method: :first, label: :'minimum turnover' %>
+            <%= f.input :minimum_turnover%>
+            <%= f.submit "Apply minimum turnover filter", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+
       </div>
     </div>
 
@@ -342,96 +404,115 @@
   </div>
 
   <!-- Trade description review -->
-  <div class="wrapper-project-versions" id="financial-criteria">
+  <div class="wrapper-project-versions" id="trade-description">
 
-    <div class="container-content-companies-financial-criteria">
+    <div class="container-content-companies-trade-description-review">
 
-      <div class="companies-financial-criteria-content-detail">
-        <div class="companies-financial-criteria-content-detail-title">
-          <div class="companies-financial-criteria-content-detail-name">
+      <div class="companies-trade-description-review-content-detail">
+        <div class="companies-trade-description-review-content-detail-title">
+          <div class="companies-trade-description-review-content-detail-name">
             <h4>Company</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
+          <div class="companies-trade-description-review-content-detail-BvD">
             <h4>BvD ID</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2013</h4>
+          <div class="companies-trade-description-review-content-detail-text">
+            <h4>Country</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2012</h4>
+          <div class="companies-trade-description-review-content-detail-text">
+            <h4>Website</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2011</h4>
+          <div class="companies-trade-description-review-content-detail-trade-description">
+            <h4>Trade description<br>(English)</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2013</h4>
+          <div class="companies-trade-description-review-content-detail-trade-description">
+            <h4>Trade description<br>(original language)</h4>
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2012</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2011</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2013</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2012</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2011</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
+          <div class="companies-trade-description-review-content-detail-financials">
             <h4>ROS <br> W/A</h4>
           </div>
+          <div class="companies-trade-description-review-content-detail-rejection">
+            <h4>Rejected <br> Financial criteria</h4>
+          </div>
+          <div class="companies-trade-description-review-content-detail-rejection">
+            <h4>Rejected <br> Manual review</h4>
+          </div>
+
         </div>
 
-        <%@project_version.companies.each do |company|%>
-        <div class="companies-financial-criteria-content-detail-current">
-          <div class="companies-financial-criteria-content-detail-name">
-            <p><%=company["Company name"]%></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=company["BvD ID number"]%></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
-              <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
-            <% end %>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
-              <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
-            <% end %>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
-              <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-            <% end %>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-          </div>
-        </div>
+        <%@project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
+
+          <% unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group %>
+
+
+            <div class="companies-trade-description-review-content-detail-current">
+              <div class="companies-trade-description-review-content-detail-name">
+                <p><%=company["Company name"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-BvD">
+                <p><%=company["BvD ID number"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-text">
+                <p><%=company["Country"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-text">
+                <p><%=company["Website"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-trade-description">
+                <p><%=company.trade_description_en%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-trade-description">
+                <p><%=company.trade_description_original%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-financials">
+                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-rejection">
+                <% if company.losses == true || company.lack_financials == true || company.turnover == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-trade-description-review-content-detail-rejection">
+              </div>
+            </div>
+
+          <% else %>
+
+            <div class="companies-trade-description-review-content-detail-current-rejected">
+              <div class="companies-trade-description-review-content-detail-name">
+                <p><%=company["Company name"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-BvD">
+                <p><%=company["BvD ID number"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-text">
+                <p><%=company["Country"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-text">
+                <p><%=company["Website"]%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-trade-description">
+                <p><%=company.trade_description_en%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-trade-description">
+                <p><%=company.trade_description_original%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-financials">
+                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+              </div>
+              <div class="companies-trade-description-review-content-detail-rejection">
+                <% if company.losses == true || company.lack_financials == true || company.turnover == true %>
+                  <p>x</p>
+                <% end %>
+              </div>
+              <div class="companies-trade-description-review-content-detail-rejection">
+              </div>
+            </div>
+
+          <% end %>
+
         <% end %>
+
       </div>
     </div>
 

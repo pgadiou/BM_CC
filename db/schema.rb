@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613092848) do
+ActiveRecord::Schema.define(version: 20180614141205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20180613092848) do
     t.bigint "project_version_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "minimum_turnover"
     t.index ["project_version_id"], name: "index_financial_filters_on_project_version_id"
   end
 

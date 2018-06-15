@@ -7,6 +7,7 @@ class ProjectVersionsController < ApplicationController
     @project_version = ProjectVersion.find(params[:id])
     @new_project_version = ProjectVersion.new
     @new_financial_filter = FinancialFilter.new
+    @financial_filters = @project_version.financial_filters
     @project = @project_version.project
     @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true)
     @unset_companies = Company.where(project_version_id: @project_version.id, unset: true)

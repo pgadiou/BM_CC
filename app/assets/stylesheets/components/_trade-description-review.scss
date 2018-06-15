@@ -1,15 +1,20 @@
-.container-content-companies-financial-criteria {
+.container-content-companies-trade-description-review {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   background: white;
   transition: all 0.3s ease;
   height:100vh;
-  width: 100%;
+  width: 70%;
   margin: 30px;
   padding: 15px;
+  overflow:scroll;
 }
 
+.companies-trade-description-review-content-detail {
+  width:1500px;
+  padding-right: 10px;
+}
 
-.companies-financial-criteria-content-detail-title {
+.companies-trade-description-review-content-detail-title {
   display: flex;
   border-bottom-style: solid;
   border-color: $light-gray;
@@ -19,7 +24,7 @@
   }
 }
 
-.companies-financial-criteria-content-detail-current-rejected {
+.companies-trade-description-review-content-detail-current-rejected {
   display: flex;
   border-bottom-style: solid;
   border-color: $light-gray;
@@ -31,7 +36,7 @@
   }
 }
 
-.companies-financial-criteria-content-detail-current {
+.companies-trade-description-review-content-detail-current {
   padding-top: 20px;
   display: flex;
   border-bottom-style: solid;
@@ -42,11 +47,11 @@
   }
 }
 
-.companies-financial-criteria-content-detail-name {
+.companies-trade-description-review-content-detail-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 40%;
+  width: 200px;
   padding-left: 10px;
   p {
     font-size: 12px;
@@ -54,8 +59,20 @@
   }
 }
 
-.companies-financial-criteria-content-detail-financials {
-  width: 30%;
+.companies-trade-description-review-content-detail-BvD {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 50px;
+  padding-left: 10px;
+  p {
+    font-size: 12px;
+    color: $gray;
+  }
+}
+
+.companies-trade-description-review-content-detail-text {
+  width: 150px;
   padding-right: 10px;
   text-align: center;
   overflow: hidden;
@@ -67,7 +84,34 @@
   }
 }
 
-.companies-financial-criteria-content-detail-rejection {
+.companies-trade-description-review-content-detail-trade-description {
+  width: 30%;
+  min-width: 250px;
+  padding-right: 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  p {
+    font-size: 12px;
+    color: $gray;
+  }
+}
+
+.companies-trade-description-review-content-detail-financials {
+  width: 50px;
+  padding-right: 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  p {
+    font-size: 12px;
+    color: $gray;
+  }
+}
+
+.companies-trade-description-review-content-detail-rejection {
   width: 60px;
   padding-right: 10px;
   text-align: center;
@@ -80,17 +124,17 @@
   }
 }
 
-.companies-financial-criteria-content-detail-created {
+.companies-trade-description-review-content-detail-created {
   width: 30%;
   padding-right: 10px;
 }
 
-.companies-financial-criteria-content-actions {
+.companies-trade-description-review-content-actions {
   padding-top: 30px;
 }
 
 
-.container-actions-financial-criteria {
+.container-actions-trade-description-review {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   background: white;
   transition: all 0.3s ease;
@@ -99,7 +143,7 @@
   padding: 15px;
 }
 
-.container-actions-financial-criteria-title {
+.container-actions-trade-description-review-title {
   text-align: center;
   h3 {
     font-size: 18px;
@@ -107,7 +151,7 @@
     }
 }
 
-.container-actions-financial-criteria-results {
+.container-actions-trade-description-review-results {
   text-align: center;
   margin-bottom: 30px;
   p {
@@ -115,7 +159,7 @@
   }
 }
 
-.container-actions-financial-criteria-action {
+.container-actions-trade-description-review-action {
   text-align: center;
   form {
     font-size: 14px;
@@ -129,26 +173,3 @@
   }
 }
 
-.container-actions-financial-criteria-filters {
-  background-color: #469ae091;
-  color: white;
-  padding: 12px;
-  margin: 6px;
-  border-radius: 20px;
-  letter-spacing: 0.9px;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight:400;
-  display: inline-flex;
-}
-
-.container-actions-financial-criteria-filters-wrapper {
-  text-align: center;
-}
-
-.container-actions-financial-criteria-form-wrapper {
-  padding-top: 20px;
-    .btn {
-    font-size: 14px;
-  }
-}

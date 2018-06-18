@@ -51,7 +51,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 200px;
+  min-width: 150px;
   padding-left: 10px;
   p {
     font-size: 12px;
@@ -63,7 +63,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 50px;
+  width: 130px;
   padding-left: 10px;
   p {
     font-size: 12px;
@@ -74,7 +74,6 @@
 .companies-trade-description-review-content-detail-text {
   width: 150px;
   padding-right: 10px;
-  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -88,7 +87,6 @@
   width: 30%;
   min-width: 250px;
   padding-right: 10px;
-  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -112,7 +110,7 @@
 }
 
 .companies-trade-description-review-content-detail-rejection {
-  width: 60px;
+  width: 140px;
   padding-right: 10px;
   text-align: center;
   overflow: hidden;

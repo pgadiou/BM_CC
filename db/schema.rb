@@ -10,10 +10,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507204003) do
+ActiveRecord::Schema.define(version: 20180614141205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.boolean "lack_financials"
+    t.boolean "lack_description"
+    t.boolean "losses"
+    t.boolean "unrelated_activity"
+    t.boolean "lack_information"
+    t.boolean "unrelated_function"
+    t.boolean "group"
+    t.boolean "turnover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "project_version_id"
+    t.string "Company name"
+    t.string "Address"
+    t.string "Website"
+    t.string "Country"
+    t.string "City"
+    t.string "BvD ID number"
+    t.string "NACE / NAF code"
+    t.string "trade_description_en"
+    t.string "trade_description_original"
+    t.integer "Turnover 2011"
+    t.integer "Turnover 2012"
+    t.integer "Turnover 2013"
+    t.integer "EBIT 2011"
+    t.integer "EBIT 2012"
+    t.integer "EBIT 2013"
+    t.decimal "ros_1"
+    t.decimal "ros_2"
+    t.decimal "ros_3"
+    t.decimal "ros_avg"
+    t.decimal "fcmu_1"
+    t.decimal "fcmu_2"
+    t.decimal "fcmu_3"
+    t.decimal "fcmu_avg"
+    t.boolean "accepted"
+    t.boolean "unset", default: true
+    t.index ["project_version_id"], name: "index_companies_on_project_version_id"
+  end
+
+  create_table "financial_filters", force: :cascade do |t|
+    t.string "description"
+    t.boolean "three_years", default: true
+    t.bigint "project_version_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "minimum_turnover"
+    t.index ["project_version_id"], name: "index_financial_filters_on_project_version_id"
+  end
+
+  create_table "project_versions", force: :cascade do |t|
+    t.bigint "project_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "open_tab"
+    t.index ["project_id"], name: "index_project_versions_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "client"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +100,8 @@ ActiveRecord::Schema.define(version: 20180507204003) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "companies", "project_versions"
+  add_foreign_key "financial_filters", "project_versions"
+  add_foreign_key "project_versions", "projects"
+  add_foreign_key "projects", "users"
 end

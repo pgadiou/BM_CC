@@ -9,12 +9,14 @@ class ProjectVersionsController < ApplicationController
     @new_financial_filter = FinancialFilter.new
     @financial_filters = @project_version.financial_filters
     @project = @project_version.project
-    @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true)
-    @unset_companies = Company.where(project_version_id: @project_version.id, unset: true)
+    @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true).sort_by(&:"BvD ID number")
+    @unset_companies = Company.where(project_version_id: @project_version.id, unset: true).sort_by(&:"BvD ID number")
+    gon.unset_companies = @unset_companies
   end
 
   def create
     @new_project_version = ProjectVersion.new(project_version_params)
+    @new_project_version.open_tab = 'Versions'
     if @new_project_version.save
       redirect_to project_version_path(@new_project_version)
     else

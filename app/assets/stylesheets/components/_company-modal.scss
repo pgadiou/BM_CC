@@ -1,0 +1,33 @@
+.modal-dialog-company{
+  width: 50vw;
+  margin: 20vh auto;
+  position: relative;
+}
+
+.modal-content-company-details {
+  background-color: white;
+  padding:0 30px;
+}
+
+.modal-body-item-title {
+  h3 {
+    font-size: 16px;
+    color: $blue;
+    }
+}
+
+.modal-body-item-content {
+  p {
+    font-size: 12px;
+  }
+}
+
+.wrapper-company-modal-infos {
+display: flex;
+}
+
+
+.wrapper-company-items {
+  width: 50%;
+  padding-right: 20px;
+}

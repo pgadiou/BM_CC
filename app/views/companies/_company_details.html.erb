@@ -1,14 +1,4 @@
-<% next_company = accepted_companies_for_manual_review[index+1] %>
-<% if next_company.nil? %>
-  <% next_company = accepted_companies_for_manual_review[0] %>
-<% end %>
-<% previous_company = accepted_companies_for_manual_review[index-1] %>
-<% if previous_company.nil? %>
-  <% previous_company = accepted_for_internet_review.last %>
-<% end %>
-
-<div class="modal fade" id='<%=company.id%>-trade-description-modal' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-company modal-dialog-centered" role="document">
+<div class="modal-dialog modal-dialog-company modal-dialog-centered" role="document">
     <div class="modal-content-company-details">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -66,21 +56,17 @@
             </div>
           </div>
           <div class="modal-body-company-item-container">
-
             <% if company.accepted_for_internet_review %>
-
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :accepted_for_internet_review, value: false %>
                 <%= f.submit 'Accepted', class: 'btn btn-primary' %>
               <% end %>
 
             <% else %>
-
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :accepted_for_internet_review, value: true %>
                 <%= f.submit 'Accepted', class: 'btn btn-outline-primary' %>
               <% end %>
-
             <% end %>
 
           </div>
@@ -102,27 +88,7 @@
               <p><%= company.trade_description_en %></p>
             </div>
           </div>
-          <div class="modal-body-item-container">
-
-            <% if company.unrelated_function %>
-
-              <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :unrelated_function, value: false %>
-                <%= f.submit 'Unrelated functions', class: 'btn btn-primary' %>
-              <% end %>
-
-            <% else %>
-
-              <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :unrelated_function, value: true %>
-                <%= f.submit 'Unrelated functions', class: 'btn btn-outline-primary' %>
-              <% end %>
-
-            <% end %>
-
-          </div>
         </div>
-
         <div class="modal-next-container">
           <div class="modal-next-button-container">
             <a href="" data-toggle="modal" data-target="#<%=next_company.id%>-trade-description-modal" data-dismiss="modal">
@@ -138,4 +104,3 @@
       </div>
     </div>
   </div>
-</div>

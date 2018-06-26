@@ -12,7 +12,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             if (company["EBIT 2011"] < 0) || (company["EBIT 2012"] < 0) || (company["EBIT 2013"] < 0)
               company.losses = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -20,7 +20,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             if ((company["EBIT 2011"] < 0) && (company["EBIT 2012"] < 0)) || ((company["EBIT 2012"] < 0) && (company["EBIT 2013"] < 0))
               company.losses = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -32,7 +32,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             if (company["Turnover 2011"] < @new_financial_filter.minimum_turnover) || (company["Turnover 2012"] < @new_financial_filter.minimum_turnover) || (company["Turnover 2013"] < @new_financial_filter.minimum_turnover)
               company.turnover = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -40,7 +40,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             if ((company["Turnover 2011"] < @new_financial_filter.minimum_turnover) && (company["Turnover 2012"] < @new_financial_filter.minimum_turnover)) || ((company["Turnover 2012"] < @new_financial_filter.minimum_turnover) && (company["Turnover 2013"] < @new_financial_filter.minimum_turnover))
               company.turnover = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -52,7 +52,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             unless (company["EBIT 2011"] != 0) || (company["EBIT 2012"] != 0) || (company["EBIT 2013"] != 0)
               company.lack_financials = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -60,7 +60,7 @@ class FinancialFiltersController < ApplicationController
           @project_version.companies.each do |company|
             unless ((company["EBIT 2011"] != 0) && (company["EBIT 2012"] != 0)) || ((company["EBIT 2012"] != 0) && (company["EBIT 2013"] != 0)) || ((company["EBIT 2012"] != 0) && (company["EBIT 2013"] != 0))
               company.lack_financials = true
-              company.unset = false
+              company.accepted_for_manual_review = false
               company.save
             end
           end
@@ -81,7 +81,7 @@ class FinancialFiltersController < ApplicationController
       @project_version.companies.each do |company|
         company.losses = false
         unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
-          company.unset = true
+          company.accepted_for_manual_review = true
         end
         company.save
       end
@@ -91,7 +91,7 @@ class FinancialFiltersController < ApplicationController
       @project_version.companies.each do |company|
         company.turnover = false
         unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
-          company.unset = true
+          company.accepted_for_manual_review = true
         end
         company.save
       end
@@ -101,7 +101,7 @@ class FinancialFiltersController < ApplicationController
       @project_version.companies.each do |company|
         company.lack_financials = false
         unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
-          company.unset = true
+          company.accepted_for_manual_review = true
         end
         company.save
       end

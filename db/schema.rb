@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180614141205) do
+ActiveRecord::Schema.define(version: 20180625134720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,11 @@ ActiveRecord::Schema.define(version: 20180614141205) do
     t.decimal "fcmu_3"
     t.decimal "fcmu_avg"
     t.boolean "accepted"
-    t.boolean "unset", default: true
+    t.boolean "unset_trade_description", default: true
+    t.boolean "accepted_for_internet_review"
+    t.boolean "unset_internet_review"
+    t.text "comment"
+    t.boolean "accepted_for_manual_review", default: true
     t.index ["project_version_id"], name: "index_companies_on_project_version_id"
   end
 

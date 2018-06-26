@@ -31,3 +31,34 @@ display: flex;
   width: 50%;
   padding-right: 20px;
 }
+
+.wrapper-company-trade-descriptions {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.modal-previous-container {
+  width:30px;
+  margin-right: 30px;
+  position: relative;
+}
+
+.modal-previous-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-next-container {
+  width:30px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.modal-next-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

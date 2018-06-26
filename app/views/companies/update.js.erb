@@ -1,0 +1,14 @@
+function refreshModal(modalHTML) {
+  const companyModal = document.getElementById('<%=@company.id%>-trade-description-modal');
+  companyModal.innerHTML = modalHTML;
+}
+
+function refreshCompany(companyHTML) {
+  const company = document.getElementById('<%=@company.id%>-trade-description-show');
+  const parentDiv = company.parentNode;
+  parentDiv.innerHTML = companyHTML;
+}
+
+refreshCompany('<%= j render "companies/trade_description_company_show", company: @company %>')
+refreshModal('<%= j render "companies/company_details", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>')
+

@@ -1,12 +1,16 @@
 
 <% case @project_version.open_tab %>
-<% when "Versions" || nil %>
+<% when nil %>
+
+  <%= render 'project_versions/version_tab', project_version: @project_version, unset_companies: @unset_companies, accepted_companies: @accepted_companies, project: @project %>
+
+<% when "Versions" %>
 
   <%= render 'project_versions/version_tab', project_version: @project_version, unset_companies: @unset_companies, accepted_companies: @accepted_companies, project: @project %>
 
 <% when "Financial criteria" %>
 
-  <%= render 'project_versions/financial_criteria_tab', project_version: @project_version, unset_companies: @unset_companies, accepted_companies: @accepted_companies, new_financial_filter: @new_financial_filter, financial_filters: @financial_filters, project: @project  %>
+  <%= render 'project_versions/financial_criteria_tab', project_version: @project_version, unset_companies: @unset_companies, accepted_companies: @accepted_companies, new_financial_filter: @new_financial_filter, financial_filters: @financial_filters, project: @project, accepted_companies_for_manual_review: @accepted_companies_for_manual_review  %>
 
 <% when "Trade description review" %>
 
@@ -62,17 +66,15 @@
               <h4>ROS <br> W/A</h4>
             </div>
             <div class="companies-trade-description-review-content-detail-rejection">
-              <h4>Rejected <br> Financial criteria</h4>
-            </div>
-            <div class="companies-trade-description-review-content-detail-rejection">
               <h4>Rejected <br> Manual review</h4>
             </div>
 
           </div>
 
-          <%@project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
+          <%@accepted_companies_for_manual_review.sort_by(&:"BvD ID number").each_with_index do |company, index|%>
 
             <%= render 'companies/trade_description_company_show', company: company %>
+            <%= render 'project_versions/company_modal', company: company, accepted_companies_for_manual_review: @accepted_companies_for_manual_review, index: index, project_version: @project_version %>
 
           <% end %>
 
@@ -88,8 +90,8 @@
       </div>
       <div class="container-actions-project-versions-results">
         <p>Total number of companies: <%=@project_version.companies.count%></p>
-        <p>Unset: <%=@unset_companies.count%></p>
-        <p>Accepted: <%=@accepted_companies.count%></p>
+        <p>Unset: <%=@unset_companies_trade_description.count%></p>
+        <p>Accepted: <%=@accepted_companies_for_internet_review.count%></p>
         <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
       </div>
       <div class="container-actions-project-versions-title">
@@ -151,9 +153,6 @@
   </div>
 </div>
 
-<%@project_version.companies.each do |company|%>
-  <%= render 'project_versions/company_modal', company: company %>
-<% end %>
 <!-- JS new excel -->
 
   <script>

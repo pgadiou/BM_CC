@@ -74,7 +74,7 @@
 
         <%project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
 
-          <% unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group %>
+          <% unless company.losses || company.turnover || company.lack_financials %>
 
             <div class="companies-financial-criteria-content-detail-current">
               <div class="companies-financial-criteria-content-detail-name">
@@ -211,9 +211,8 @@
       </div>
       <div class="container-actions-financial-criteria-results">
         <p>Total number of companies: <%=project_version.companies.count%></p>
-        <p>Unset: <%=unset_companies.count%></p>
-        <p>Accepted: <%=accepted_companies.count%></p>
-        <p>Rejected: <%=project_version.companies.count - accepted_companies.count - unset_companies.count%></p>
+        <p>Accepted: <%=accepted_companies_for_manual_review.count%></p>
+        <p>Rejected: <%=project_version.companies.count - accepted_companies_for_manual_review.count%></p>
       </div>
       <div class="container-actions-financial-criteria-title">
         <h3>Financial filters</h3>

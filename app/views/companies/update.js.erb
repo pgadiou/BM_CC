@@ -9,6 +9,13 @@ function refreshCompany(companyHTML) {
   parentDiv.innerHTML = companyHTML;
 }
 
+function refreshResults(resultsHTML) {
+  const resultsBox = document.getElementById('trade-description-results-box');
+  resultsBox.innerHTML = resultsHTML.innerHTML;
+}
+
+refreshResults('<%= j render "project_versions/trade_description_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>')
+
 refreshCompany('<%= j render "companies/trade_description_company_show", company: @company %>')
 refreshModal('<%= j render "companies/company_details", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>')
 

@@ -84,25 +84,9 @@
 
     </div>
 
-    <div class="container-actions-project-versions">
-      <div class="container-actions-project-versions-title">
-        <h3>Companies Selection</h3>
-      </div>
-      <div class="container-actions-project-versions-results">
-        <p>Total number of companies: <%=@project_version.companies.count%></p>
-        <p>Unset: <%=@unset_companies_trade_description.count%></p>
-        <p>Accepted: <%=@accepted_companies_for_internet_review.count%></p>
-        <p>Rejected: <%=@project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
-      </div>
-      <div class="container-actions-project-versions-title">
-        <h3>Financial results</h3>
-      </div>
-      <div class="container-actions-project-versions-action">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">
-         Create project
-        </button>
-      </div>
-    </div>
+      <%= render 'project_versions/trade_description_results_box', accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>
+
+
 
   </div>
 

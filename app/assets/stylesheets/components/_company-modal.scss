@@ -1,4 +1,4 @@
-.modal-dialog-company{
+.modal-dialog-company {
   width: 50vw;
   margin: 20vh auto;
   position: relative;
@@ -20,10 +20,27 @@
   p {
     font-size: 12px;
   }
+  a {
+    font-size: 12px;
+    text-decoration: underline;
+    color: #469ae0b5;
+  }
+}
+
+.modal-body-item-translation {
+  a {
+    font-size: 12px;
+    text-decoration: underline;
+  }
+}
+
+.modal-body-company-button-container {
+  padding-top: 10px;
 }
 
 .wrapper-company-modal-infos {
 display: flex;
+padding-bottom: 10px;
 }
 
 
@@ -61,4 +78,23 @@ display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#company_trade_description_en {
+  min-height: 20px;
+}
+
+.trade-description-input{
+  min-height: 60px;
+  width: 90%;
+  font-size: 12px;
+}
+
+.comment-input{
+  min-height: 60px;
+  width: 90%;
+  font-size: 12px;
+  resize  : none;
+  overflow: auto;
+  vertical-align: top;
 }

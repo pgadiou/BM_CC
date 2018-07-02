@@ -11,19 +11,26 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     @project_version = @company.project_version
-    @company.unset_trade_description = false
     define_next_previous_companies(@company)
     @company.update(selection_params)
-    if @company.accepted_for_internet_review
-      @company.unset_trade_description = false
-      @company.unrelated_activity = false
-      @company.group = false
-      @company.unrelated_function = false
-    elsif @company.unrelated_activity || @company.group || @company.unrelated_function
-      @company.unset_trade_description = false
-      @company.accepted_for_internet_review = false
-    else
-      @company.unset_trade_description = true
+    @accepted_companies_for_manual_review = Company.where(project_version_id: @project_version.id, accepted_for_manual_review: true).sort_by(&:"BvD ID number")
+    @accepted_companies_for_internet_review = Company.where(project_version_id: @project_version.id, accepted_for_internet_review: true).sort_by(&:"BvD ID number")
+    @unset_companies_trade_description = Company.where(project_version_id: @project_version.id, unset_trade_description: true).sort_by(&:"BvD ID number")
+    @unset_companies_internet_review = Company.where(project_version_id: @project_version.id, unset_internet_review: true).sort_by(&:"BvD ID number")
+    @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true).sort_by(&:"BvD ID number")
+    @unset_companies = @unset_companies_trade_description + @unset_companies_internet_review
+    if @project_version.open_tab = 'Trade description review'
+      if selection_params[:accepted_for_internet_review] == 'true'
+        @company.unset_trade_description = false
+        @company.unrelated_activity = false
+        @company.group = false
+        @company.unrelated_function = false
+      elsif selection_params[:unrelated_function] == 'true' || selection_params[:unrelated_activity] == 'true' || selection_params[:group] == 'true' || selection_params[:lack_information] == 'true'
+        @company.unset_trade_description = false
+        @company.accepted_for_internet_review = false
+      else
+        @company.unset_trade_description = true unless @company.unrelated_function? || @company.unrelated_activity? || @company.group? || @company.lack_information?
+      end
     end
     if @company.save
       respond_to do |format|
@@ -41,7 +48,7 @@ class CompaniesController < ApplicationController
   private
 
   def selection_params
-    params.require(:company).permit(:unrelated_activity, :lack_information, :unrelated_function, :group, :accepted_for_internet_review)
+    params.require(:company).permit(:unrelated_activity, :lack_information, :unrelated_function, :group, :accepted_for_internet_review, :trade_description_en, :comment, :accepted)
   end
 
   def define_next_previous_companies(company)

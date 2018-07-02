@@ -65,20 +65,20 @@
               <p><%= company["Website"] %></p>
             </div>
           </div>
-          <div class="modal-body-company-item-container">
+          <div class="modal-body-company-button-container">
 
             <% if company.accepted_for_internet_review %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :accepted_for_internet_review, value: false %>
-                <%= f.submit 'Accepted', class: 'btn btn-primary' %>
+                <%= f.submit 'Accepted', class: 'btn btn-primary btn-company-modal-pushed' %>
               <% end %>
 
             <% else %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :accepted_for_internet_review, value: true %>
-                <%= f.submit 'Accepted', class: 'btn btn-outline-primary' %>
+                <%= f.submit 'Accept', class: 'btn btn-primary btn-company-modal' %>
               <% end %>
 
             <% end %>
@@ -92,30 +92,107 @@
             </div>
             <div class="modal-body-item-content">
               <p><%= company.trade_description_original %></p>
+              <a href="https://translate.google.fr/?hl=fr#auto/en/<%=company.trade_description_original%>" target="_blank">To English (Google Translate)</a>
             </div>
+            <div class="modal-body-item-translation">
+            </div>
+
           </div>
           <div class="modal-body-item-container">
             <div class="modal-body-item-title">
               <h3>Trade description (english)</h3>
             </div>
             <div class="modal-body-item-content">
-              <p><%= company.trade_description_en %></p>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.text_field :trade_description_en, placeholder: company.trade_description_en, class: 'trade-description-input', id: "#{company.id}-trade-description-english-input" %>
+                <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-trade-description-english-submit" %>
+              <% end %>
             </div>
           </div>
           <div class="modal-body-item-container">
+            <div class="modal-body-item-title" style="color:black">
+              <h3>User comment</h3>
+            </div>
+            <div class="modal-body-item-content">
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.text_field :comment, placeholder: company.comment, class: 'comment-input', id: "#{company.id}-comment-input" %>
+                <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-comment-submit" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="modal-body-company-button-container">
 
             <% if company.unrelated_function %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :unrelated_function, value: false %>
-                <%= f.submit 'Unrelated functions', class: 'btn btn-primary' %>
+                <%= f.submit 'Unrelated functions', class: 'btn btn-primary btn-company-modal-pushed' %>
               <% end %>
 
             <% else %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :unrelated_function, value: true %>
-                <%= f.submit 'Unrelated functions', class: 'btn btn-outline-primary' %>
+                <%= f.submit 'Unrelated functions', class: 'btn btn-primary btn-company-modal' %>
+              <% end %>
+
+            <% end %>
+
+          </div>
+          <div class="modal-body-company-button-container">
+
+            <% if company.unrelated_activity %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :unrelated_activity, value: false %>
+                <%= f.submit 'Unrelated activity', class: 'btn btn-primary btn-company-modal-pushed' %>
+              <% end %>
+
+            <% else %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :unrelated_activity, value: true %>
+                <%= f.submit 'Unrelated activity', class: 'btn btn-primary btn-company-modal' %>
+              <% end %>
+
+            <% end %>
+
+          </div>
+          <div class="modal-body-company-button-container">
+
+            <% if company.group %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :group, value: false %>
+                <%= f.submit 'Part of a group', class: 'btn btn-primary btn-company-modal-pushed' %>
+              <% end %>
+
+            <% else %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :group, value: true %>
+                <%= f.submit 'Part of a group', class: 'btn btn-primary btn-company-modal' %>
+              <% end %>
+
+            <% end %>
+
+          </div>
+          <div class="modal-body-company-button-container">
+
+            <% if company.lack_information %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :group, value: false %>
+                <%= f.submit 'Insufficient info', class: 'btn btn-primary btn-company-modal-pushed' %>
+              <% end %>
+
+            <% else %>
+
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.hidden_field :group, value: true %>
+                <%= f.submit 'Insufficient info', class: 'btn btn-primary btn-company-modal' %>
               <% end %>
 
             <% end %>
@@ -139,3 +216,43 @@
     </div>
   </div>
 </div>
+
+<script>
+  var $inputTD<%=company.id%> = $('#<%=company.id%>-trade-description-english-input');
+  var $submitTD<%=company.id%> = $('#<%=company.id%>-trade-description-english-submit');
+  var typingTimerTD;                //timer identifier
+  var doneTypingIntervalTD = 3000;  //time in ms, 5 second for example
+
+  var $inputComment<%=company.id%> = $('#<%=company.id%>-comment-input');
+  var $submitComment<%=company.id%> = $('#<%=company.id%>-comment-submit');
+  var typingTimerComment;                //timer identifier
+  var doneTypingIntervalComment = 3000;  //time in ms, 5 second for example
+
+  //on keyup, start the countdown
+  $inputTD<%=company.id%>.on('keyup', function () {
+    clearTimeout(typingTimerTD);
+    typingTimerTD = setTimeout(doneTypingTD<%=company.id%>, doneTypingIntervalTD);
+  });
+
+  $inputComment<%=company.id%>.on('keyup', function () {
+    clearTimeout(typingTimerComment);
+    typingTimerComment = setTimeout(doneTypingComment<%=company.id%>, doneTypingIntervalComment);
+  });
+
+  //on keydown, clear the countdown
+  $inputTD<%=company.id%>.on('keydown', function () {
+    clearTimeout(typingTimerTD);
+  });
+
+  $inputComment<%=company.id%>.on('keydown', function () {
+    clearTimeout(typingTimerComment);
+  });
+
+  //user is "finished typing," do something
+  function doneTypingTD<%=company.id%> () {
+    $submitTD<%=company.id%>.click();
+  }
+  function doneTypingComment<%=company.id%> () {
+    $submitComment<%=company.id%>.click();
+  }
+</script>

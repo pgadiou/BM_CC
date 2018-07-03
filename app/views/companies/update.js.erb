@@ -1,0 +1,26 @@
+function refreshModal(modalHTML, modalDIV) {
+  const companyModal = document.getElementById(modalDIV);
+  companyModal.innerHTML = modalHTML;
+}
+
+function refreshCompany(companyHTML, companyDIV) {
+  const company = document.getElementById(companyDIV);
+  const parentDiv = company.parentNode;
+  parentDiv.innerHTML = companyHTML;
+}
+
+function refreshResults(resultsHTML, resultsDIV) {
+  const resultsBox = document.getElementById(resultsDIV);
+  resultsBox.innerHTML = resultsHTML;
+}
+
+<% if @project_version.open_tab == 'Trade description review' %>
+  refreshResults('<%= j render "project_versions/trade_description_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>', 'trade-description-results-box');
+  refreshCompany('<%= j render "companies/trade_description_company_show", company: @company %>', '<%=@company.id%>-trade-description-show');
+  refreshModal('<%= j render "companies/company_details_trade_description", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>', '<%=@company.id%>-trade-description-modal');
+<% elsif @project_version.open_tab == 'Internet review' %>
+  refreshResults('<%= j render "project_versions/internet_review_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_internet_review: @unset_companies_internet_review, project_version: @project_version, accepted_companies: @accepted_companies %>', 'internet-review-results-box');
+  refreshCompany('<%= j render "companies/internet_review_company_show", company: @company %>', '<%=@company.id%>-internet-review-show');
+  refreshModal('<%= j render "companies/company_details_internet_review", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>', '<%=@company.id%>-internet-review-modal');
+<% end %>
+

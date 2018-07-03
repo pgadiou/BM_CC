@@ -1,4 +1,4 @@
-.content-companies-trade-description-review-wrapper {
+.content-companies-internet-review-wrapper {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   background: white;
   transition: all 0.3s ease;
@@ -9,16 +9,16 @@
   overflow:scroll;
 }
 
-.container-content-companies-trade-description-review {
+.container-content-companies-internet-review {
   overflow:scroll;
 }
 
-.companies-trade-description-review-content-detail {
+.companies-internet-review-content-detail {
   width:1500px;
   padding-right: 10px;
 }
 
-.companies-trade-description-review-content-detail-title {
+.companies-internet-review-content-detail-title {
   display: flex;
   border-bottom-style: solid;
   border-color: $light-gray;
@@ -28,7 +28,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-current-rejected {
+.companies-internet-review-content-detail-current-rejected {
   display: flex;
   border-bottom-style: solid;
   border-color: $light-gray;
@@ -40,7 +40,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-current-accepted {
+.companies-internet-review-content-detail-current-accepted {
   display: flex;
   border-bottom-style: solid;
   border-color: $light-gray;
@@ -52,7 +52,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-current {
+.companies-internet-review-content-detail-current {
   padding-top: 20px;
   display: flex;
   border-bottom-style: solid;
@@ -63,7 +63,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-name {
+.companies-internet-review-content-detail-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -75,7 +75,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-BvD {
+.companies-internet-review-content-detail-BvD {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -87,7 +87,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-text {
+.companies-internet-review-content-detail-text {
   width: 150px;
   padding-right: 10px;
   overflow: hidden;
@@ -99,7 +99,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-trade-description {
+.companies-internet-review-content-detail-trade-description {
   width: 15%;
   min-width: 150px;
   padding-right: 10px;
@@ -112,7 +112,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-financials {
+.companies-internet-review-content-detail-financials {
   width: 100px;
   padding-right: 10px;
   text-align: center;
@@ -125,7 +125,7 @@
   }
 }
 
-.companies-trade-description-review-content-detail-rejection {
+.companies-internet-review-content-detail-rejection {
   width: 200px;
   padding-right: 10px;
   text-align: center;
@@ -138,17 +138,17 @@
   }
 }
 
-.companies-trade-description-review-content-detail-created {
+.companies-internet-review-content-detail-created {
   width: 30%;
   padding-right: 10px;
 }
 
-.companies-trade-description-review-content-actions {
+.companies-internet-review-content-actions {
   padding-top: 30px;
 }
 
 
-.container-actions-trade-description-review {
+.container-actions-internet-review {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
   background: white;
   transition: all 0.3s ease;
@@ -157,7 +157,7 @@
   padding: 15px;
 }
 
-.container-actions-trade-description-review-title {
+.container-actions-internet-review-title {
   text-align: center;
   h3 {
     font-size: 18px;
@@ -165,7 +165,7 @@
     }
 }
 
-.container-actions-trade-description-review-results {
+.container-actions-internet-review-results {
   text-align: center;
   margin-bottom: 30px;
   p {
@@ -173,7 +173,7 @@
   }
 }
 
-.container-actions-trade-description-review-action {
+.container-actions-internet-review-action {
   text-align: center;
   form {
     font-size: 14px;
@@ -186,4 +186,3 @@
     font-size: 14px;
   }
 }
-

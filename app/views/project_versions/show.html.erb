@@ -71,10 +71,10 @@
 
           </div>
 
-          <%@accepted_companies_for_manual_review.sort_by(&:"BvD ID number").each_with_index do |company, index|%>
+          <%@accepted_companies_for_manual_review.each_with_index do |company, index|%>
 
             <%= render 'companies/trade_description_company_show', company: company %>
-            <%= render 'project_versions/company_modal', company: company, accepted_companies_for_manual_review: @accepted_companies_for_manual_review, index: index, project_version: @project_version %>
+            <%= render 'project_versions/company_modal_trade_description', company: company, accepted_companies_for_manual_review: @accepted_companies_for_manual_review, index: index, project_version: @project_version %>
 
           <% end %>
 
@@ -83,10 +83,11 @@
       </div>
 
     </div>
+    <div class="container-actions-project-versions" id='trade-description-results-box'>
 
       <%= render 'project_versions/trade_description_results_box', accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>
 
-
+    </div>
 
   </div>
 
@@ -111,6 +112,67 @@
       </div>
     </div>
   </div>
+
+  <!-- internet review -->
+
+  <div class="wrapper-project-versions" id="internet-review">
+
+    <div class="content-companies-internet-review-wrapper">
+
+      <div class="container-content-companies-internet-review">
+
+
+        <div class="companies-internet-review-content-detail">
+          <div class="companies-internet-review-content-detail-title">
+            <div class="companies-internet-review-content-detail-name">
+              <h4>Company</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-BvD">
+              <h4>BvD ID</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-text">
+              <h4>Country</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-text">
+              <h4>Website</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-trade-description">
+              <h4>Trade description<br>(English)</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-trade-description">
+              <h4>Trade description<br>(original language)</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-financials">
+              <h4>ROS <br> W/A</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-rejection">
+              <h4>Rejected <br> Manual review</h4>
+            </div>
+
+          </div>
+
+          <%@accepted_companies_for_internet_review.each_with_index do |company, index|%>
+
+            <%= render 'companies/internet_review_company_show', company: company %>
+            <%= render 'project_versions/company_modal_internet_review', company: company, accepted_companies_for_internet_review: @accepted_companies_for_internet_review, index: index, project_version: @project_version %>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="container-actions-project-versions" id='internet-review-results-box'>
+
+      <%= render 'project_versions/internet_review_results_box', accepted_companies: @accepted_companies, accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_internet_review: @unset_companies_internet_review, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>
+
+    </div>
+
+  </div>
+
+
+
 
 <% end %>
 

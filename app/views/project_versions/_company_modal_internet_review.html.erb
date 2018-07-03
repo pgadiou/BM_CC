@@ -1,13 +1,13 @@
-<% next_company = accepted_companies_for_manual_review[index+1] %>
+<% next_company = accepted_companies_for_internet_review[index+1] %>
 <% if next_company.nil? %>
-  <% next_company = accepted_companies_for_manual_review[0] %>
+  <% next_company = accepted_companies_for_internet_review[0] %>
 <% end %>
-<% previous_company = accepted_companies_for_manual_review[index-1] %>
+<% previous_company = accepted_companies_for_internet_review[index-1] %>
 <% if previous_company.nil? %>
   <% previous_company = accepted_for_internet_review.last %>
 <% end %>
 
-<div class="modal fade" id='<%=company.id%>-trade-description-modal' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id='<%=company.id%>-internet-review-modal' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-company modal-dialog-centered" role="document">
     <div class="modal-content-company-details">
       <div class="modal-header">
@@ -18,7 +18,7 @@
       <div class="wrapper-company-modal-infos">
         <div class="modal-previous-container">
           <div class="modal-previous-button-container">
-            <a href="" data-toggle="modal" data-target="#<%=previous_company.id%>-trade-description-modal" data-dismiss="modal">
+            <a href="" data-toggle="modal" data-target="#<%=previous_company.id%>-internet-review-modal" data-dismiss="modal">
               <i class="fa fa-chevron-left"></i>
             </a>
           </div>
@@ -67,17 +67,17 @@
           </div>
           <div class="modal-body-company-button-container">
 
-            <% if company.accepted_for_internet_review %>
+            <% if company.accepted %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :accepted_for_internet_review, value: false %>
+                <%= f.hidden_field :accepted, value: false %>
                 <%= f.submit 'Accepted', class: 'btn btn-primary btn-company-modal-pushed' %>
               <% end %>
 
             <% else %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :accepted_for_internet_review, value: true %>
+                <%= f.hidden_field :accepted, value: true %>
                 <%= f.submit 'Accept', class: 'btn btn-primary btn-company-modal' %>
               <% end %>
 
@@ -202,7 +202,7 @@
 
         <div class="modal-next-container">
           <div class="modal-next-button-container">
-            <a href="" data-toggle="modal" data-target="#<%=next_company.id%>-trade-description-modal" data-dismiss="modal">
+            <a href="" data-toggle="modal" data-target="#<%=next_company.id%>-internet-review-modal" data-dismiss="modal">
               <i class="fa fa-chevron-right"></i>
             </a>
           </div>

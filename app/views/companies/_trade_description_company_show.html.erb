@@ -1,106 +1,106 @@
-            <div>
+<div>
 
-            <div id='<%=company.id%>-trade-description-show'>
+  <div id='<%=company.id%>-trade-description-show'>
 
-            <% if company.unset_trade_description %>
+    <% if company.unset_trade_description %>
 
-              <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
+    <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
 
-                <div class="companies-trade-description-review-content-detail-current">
-                  <div class="companies-trade-description-review-content-detail-name">
-                    <p><%=company["Company name"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-BvD">
-                    <p><%=company["BvD ID number"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Country"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Website"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_en%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_original%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-financials">
-                    <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-rejection">
-                  </div>
-                </div>
+      <div class="companies-trade-description-review-content-detail-current">
+        <div class="companies-trade-description-review-content-detail-name">
+          <p><%=company["Company name"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-BvD">
+          <p><%=company["BvD ID number"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Country"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Website"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_en%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_original%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-financials">
+          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-rejection">
+        </div>
+      </div>
 
-              </a>
+    </a>
 
-            <% elsif company.accepted_for_internet_review %>
+    <% elsif company.accepted_for_internet_review %>
 
-              <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
+    <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
 
-                <div class="companies-trade-description-review-content-detail-current-accepted">
-                  <div class="companies-trade-description-review-content-detail-name">
-                    <p><%=company["Company name"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-BvD">
-                    <p><%=company["BvD ID number"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Country"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Website"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_en%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_original%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-financials">
-                    <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-rejection">
-                  </div>
-                </div>
+      <div class="companies-trade-description-review-content-detail-current-accepted">
+        <div class="companies-trade-description-review-content-detail-name">
+          <p><%=company["Company name"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-BvD">
+          <p><%=company["BvD ID number"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Country"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Website"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_en%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_original%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-financials">
+          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-rejection">
+        </div>
+      </div>
 
-              </a>
+    </a>
 
-            <% else %>
+    <% else %>
 
-              <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
+    <a href="#" data-toggle="modal" data-target='#<%=company.id%>-trade-description-modal'>
 
-                <div class="companies-trade-description-review-content-detail-current-rejected">
-                  <div class="companies-trade-description-review-content-detail-name">
-                    <p><%=company["Company name"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-BvD">
-                    <p><%=company["BvD ID number"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Country"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-text">
-                    <p><%=company["Website"]%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_en%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-trade-description">
-                    <p><%=company.trade_description_original%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-financials">
-                    <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-                  </div>
-                  <div class="companies-trade-description-review-content-detail-rejection">
-                    <p>x</p>
-                  </div>
-                </div>
+      <div class="companies-trade-description-review-content-detail-current-rejected">
+        <div class="companies-trade-description-review-content-detail-name">
+          <p><%=company["Company name"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-BvD">
+          <p><%=company["BvD ID number"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Country"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-text">
+          <p><%=company["Website"]%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_en%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-trade-description">
+          <p><%=company.trade_description_original%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-financials">
+          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+        </div>
+        <div class="companies-trade-description-review-content-detail-rejection">
+          <p>x</p>
+        </div>
+      </div>
 
-              </a>
+    </a>
 
-            <% end %>
+    <% end %>
 
-            </div>
+  </div>
 
-          </div>
+</div>

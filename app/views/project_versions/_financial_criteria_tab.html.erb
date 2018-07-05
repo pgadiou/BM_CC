@@ -1,22 +1,46 @@
 <div class="container-nav-buttons">
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group" role="group" aria-label="First group">
-        <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-primary btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Third group">
-        <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
-        <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
-        <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+      <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+      <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-primary btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Third group">
+      <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+      <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+      <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
     </div>
   </div>
+  <% unless @ros_results_final.empty? %>
+    <div class="final-sample-pli-results-container">
+      <div class="final-sample-pli-results-item">
+        <h4>Max</h4>
+        <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q3</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Median</h4>
+        <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q1</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Min</h4>
+        <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
+      </div>
+    </div>
+  <% end %>
+</div>
 
   <!-- Financial criteria -->
   <div class="wrapper-project-versions" id="financial-criteria">
@@ -32,31 +56,31 @@
             <h4>BvD ID</h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2013</h4>
+            <h4>Turnover <br> <%=project_version.year_3%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2012</h4>
+            <h4>Turnover <br> <%=project_version.year_2%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> 2011</h4>
+            <h4>Turnover <br> <%=project_version.year_1%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2013</h4>
+            <h4>EBIT <br> <%=project_version.year_3%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2012</h4>
+            <h4>EBIT <br> <%=project_version.year_2%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> 2011</h4>
+            <h4>EBIT <br> <%=project_version.year_1%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2013</h4>
+            <h4>ROS <br> <%=project_version.year_3%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2012</h4>
+            <h4>ROS <br> <%=project_version.year_2%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> 2011</h4>
+            <h4>ROS <br> <%=project_version.year_1%></h4>
           </div>
           <div class="companies-financial-criteria-content-detail-financials">
             <h4>ROS <br> W/A</h4>
@@ -84,41 +108,71 @@
                 <p><%=company["BvD ID number"]%></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-              </div>
+
+              <% if project_version.pli == 'ROS' %>
+                <div class="companies-financial-criteria-content-detail-financials">
+                  <% if company.ros_3 %>
+                    <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_2 %>
+                    <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_1 %>
+                    <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_avg %>
+                    <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+
+              <% elsif project_version.pli == 'FCMU' %>
+
+                <div class="companies-financial-criteria-content-detail-financials">
+                  <% if company.fcmu_3 %>
+                    <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_2 %>
+                    <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_1 %>
+                    <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_avg %>
+                    <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+
+              <% end %>
+
               <div class="companies-financial-criteria-content-detail-financials">
                 <% if company.losses == true %>
                   <p>x</p>
@@ -145,42 +199,73 @@
               <div class="companies-financial-criteria-content-detail-financials">
                 <p><%=company["BvD ID number"]%></p>
               </div>
+
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["Turnover 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2013"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2012"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
               <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company["EBIT 2011"], unit: "", precision: 0, delimiter: " ") %></p>
+                <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
               </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2013"] != 0 && company["EBIT 2013"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2013"].to_f / company["Turnover 2013"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2012"] != 0 && company["EBIT 2012"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2012"].to_f / company["Turnover 2012"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company["Turnover 2011"] != 0 && company["EBIT 2011"] != 0 %>
-                  <p><%=number_to_percentage((company["EBIT 2011"].to_f / company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
-              </div>
+
+              <% if project_version.pli == 'ROS' %>
+                <div class="companies-financial-criteria-content-detail-financials">
+                  <% if company.ros_3 %>
+                    <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_2 %>
+                    <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_1 %>
+                    <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.ros_avg %>
+                    <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+
+              <% elsif project_version.pli == 'FCMU' %>
+
+                <div class="companies-financial-criteria-content-detail-financials">
+                  <% if company.fcmu_3 %>
+                    <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_2 %>
+                    <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_1 %>
+                    <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+                <div class="companies-financial-criteria-content-detail-financials">
+                 <% if company.fcmu_avg %>
+                    <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+                  <% end %>
+                </div>
+
+              <% end %>
+
               <div class="companies-financial-criteria-content-detail-financials">
                 <% if company.losses == true %>
                   <p>x</p>

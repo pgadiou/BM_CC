@@ -5,7 +5,8 @@ class CompaniesController < ApplicationController
 
   def import
     Company.import(params[:file], params[:project_version_id])
-    redirect_to :back, notice: "Companies imported"
+    @project_version = ProjectVersion.find(params[:project_version_id].to_i)
+    redirect_to project_version_path(@project_version), notice: "Companies imported"
   end
 
   def update
@@ -18,11 +19,9 @@ class CompaniesController < ApplicationController
         @company.unrelated_activity = false
         @company.group = false
         @company.unrelated_function = false
-        @company.unset_internet_review = true
       elsif selection_params[:unrelated_function] == 'true' || selection_params[:unrelated_activity] == 'true' || selection_params[:group] == 'true' || selection_params[:lack_information] == 'true'
         @company.unset_trade_description = false
         @company.accepted_for_internet_review = false
-        @company.unset_internet_review = false
       else
         @company.unset_trade_description = true unless @company.unrelated_function? || @company.unrelated_activity? || @company.group? || @company.lack_information? || @company.accepted_for_internet_review?
       end
@@ -31,6 +30,7 @@ class CompaniesController < ApplicationController
         @company.unrelated_activity = false
         @company.group = false
         @company.unrelated_function = false
+        @company.lack_information = false
         @company.unset_internet_review = false
       elsif selection_params[:unrelated_function] == 'true' || selection_params[:unrelated_activity] == 'true' || selection_params[:group] == 'true' || selection_params[:lack_information] == 'true'
         @company.unset_internet_review = false

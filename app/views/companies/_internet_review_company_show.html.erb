@@ -26,7 +26,15 @@
           <p><%=company.trade_description_original%></p>
         </div>
         <div class="companies-internet-review-content-detail-financials">
-          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          <% if @project_version.pli == 'ROS' %>
+            <% if company.ros_avg %>
+              <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% elsif @project_version.pli == 'FCMU'%>
+            <% if company.fcmu_avg %>
+              <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% end %>
         </div>
         <div class="companies-trade-description-review-content-detail-rejection">
         </div>
@@ -58,7 +66,15 @@
           <p><%=company.trade_description_original%></p>
         </div>
         <div class="companies-internet-review-content-detail-financials">
-          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          <% if @project_version.pli == 'ROS' %>
+            <% if company.ros_avg %>
+              <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% elsif @project_version.pli == 'FCMU'%>
+            <% if company.fcmu_avg %>
+              <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% end %>
         </div>
         <div class="companies-trade-description-review-content-detail-rejection">
         </div>
@@ -90,7 +106,15 @@
           <p><%=company.trade_description_original%></p>
         </div>
         <div class="companies-internet-review-content-detail-financials">
-          <p><%=number_to_percentage((company["EBIT 2013"].to_f + company["EBIT 2012"].to_f + company["EBIT 2011"].to_f)/ (company["Turnover 2013"].to_f + company["Turnover 2012"].to_f + company["Turnover 2011"].to_f) * 100, precision: 2)%></p>
+          <% if @project_version.pli == 'ROS' %>
+            <% if company.ros_avg %>
+              <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% elsif @project_version.pli == 'FCMU'%>
+            <% if company.fcmu_avg %>
+              <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+            <% end %>
+          <% end %>
         </div>
         <div class="companies-trade-description-review-content-detail-rejection">
           <p>x</p>

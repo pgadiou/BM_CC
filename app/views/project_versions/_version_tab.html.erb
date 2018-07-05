@@ -1,22 +1,47 @@
-  <div class="container-nav-buttons">
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group" role="group" aria-label="First group">
-        <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-primary btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Third group">
-        <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
-        <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
-        <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+<div class="container-nav-buttons">
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+      <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-primary btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+      <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Third group">
+      <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+      <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+      <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
     </div>
   </div>
+  <% unless @ros_results_final.empty? %>
+    <div class="final-sample-pli-results-container">
+      <div class="final-sample-pli-results-item">
+        <h4>Max</h4>
+        <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q3</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Median</h4>
+        <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q1</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Min</h4>
+        <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
+      </div>
+    </div>
+  <% end %>
+
+</div>
 
   <!-- project version -->
   <div class="wrapper-project-versions" id="versions">
@@ -41,7 +66,7 @@
             <p><%=project_version.description%></p>
           </div>
           <div class="project-version-content-detail-period">
-            <p><%=project_version.project.client%></p>
+            <p><%=project_version.year_1%>-<%=project_version.year_3%></p>
           </div>
           <div class="project-version-content-detail-created">
             <p><%=project_version.created_at.strftime('%F')%></p>

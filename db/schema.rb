@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625134720) do
+ActiveRecord::Schema.define(version: 20180705111051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,12 @@ ActiveRecord::Schema.define(version: 20180625134720) do
     t.string "NACE / NAF code"
     t.string "trade_description_en"
     t.string "trade_description_original"
-    t.integer "Turnover 2011"
-    t.integer "Turnover 2012"
-    t.integer "Turnover 2013"
-    t.integer "EBIT 2011"
-    t.integer "EBIT 2012"
-    t.integer "EBIT 2013"
+    t.integer "turnover_year_1"
+    t.integer "turnover_year_2"
+    t.integer "turnover_year_3"
+    t.integer "EBIT_year_1"
+    t.integer "EBIT_year_2"
+    t.integer "EBIT_year_3"
     t.decimal "ros_1"
     t.decimal "ros_2"
     t.decimal "ros_3"
@@ -75,6 +75,10 @@ ActiveRecord::Schema.define(version: 20180625134720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "open_tab"
+    t.integer "year_1"
+    t.integer "year_2"
+    t.integer "year_3"
+    t.string "pli"
     t.index ["project_id"], name: "index_project_versions_on_project_id"
   end
 

@@ -3,6 +3,7 @@
 }
 
 .container-nav-buttons {
+  display:flex;
   width: 100%;
   margin-top: 20px;
   margin-left: 30px;
@@ -10,6 +11,29 @@
     font-size: 12px;
   }
 }
+
+.final-sample-pli-results-container {
+  display:flex;
+  margin-right:50px;
+  margin-left: auto;
+}
+
+.final-sample-pli-results-item {
+  width: 100px;
+  font-size: 12px;
+  padding: 10px 10px;
+  background-color: white;
+  text-align: center;
+  margin: 0 10px;
+  vertical-align: middle;
+  h4 {
+    font-size: 12px;
+    color: $blue;
+
+  }
+}
+
+
 
 .btn-toolbar {
   button {
@@ -55,6 +79,12 @@
   width: 100%;
   margin: 30px;
   padding: 15px;
+  p {
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 18px;
+  }
 }
 
 

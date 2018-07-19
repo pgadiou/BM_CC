@@ -80,7 +80,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.losses = false
-        unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save
@@ -90,7 +90,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.turnover = false
-        unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save
@@ -100,7 +100,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.lack_financials = false
-        unless company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save

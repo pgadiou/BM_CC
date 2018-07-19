@@ -19,10 +19,21 @@ require 'descriptive_statistics'
     @unset_companies_internet_review = Company.where(project_version_id: @project_version.id, unset_internet_review: true, accepted_for_internet_review: true, accepted_for_manual_review: true).sort_by(&:"BvD ID number")
     @accepted_companies = Company.where(project_version_id: @project_version.id, accepted_for_internet_review: true, accepted_for_manual_review: true, accepted: true).sort_by(&:"BvD ID number")
     @unset_companies = @unset_companies_trade_description + @unset_companies_internet_review
+    @rejected_internet_review = Company.where(project_version_id: @project_version.id, accepted_for_internet_review: true, accepted: false).sort_by(&:"BvD ID number")
+    @rejected_trade_description_review = Company.where(project_version_id: @project_version.id, accepted_for_manual_review: true, accepted_for_internet_review: false).sort_by(&:"BvD ID number")
+    @rejected_financial_filters = Company.where(project_version_id: @project_version.id, accepted_for_manual_review: false).sort_by(&:"BvD ID number")
+    @unset_companies = @unset_companies_trade_description + @unset_companies_internet_review
 
     define_overall_final_sample_results
 
     define_final_pli_results
+
+    respond_to do |format|
+      format.html
+      format.csv
+      format.xls
+    end
+
 
     # gon.unset_companies = @unset_companies
   end

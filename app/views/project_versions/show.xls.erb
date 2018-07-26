@@ -826,32 +826,32 @@
     <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
     <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
     <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <% if company.losses == 'true' %>
+    <% if company.losses? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.turnover == 'true' %>
+    <% if company.turnover? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.lack_information == 'true' %>
+    <% if company.lack_information? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.unrelated_function == 'true' %>
+    <% if company.unrelated_function? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.unrelated_activity == 'true' %>
+    <% if company.unrelated_activity? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.group == 'true' %>
+    <% if company.group? %>
     <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
@@ -871,32 +871,32 @@
     <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
     <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
     <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <% if company.losses == 'true' %>
+    <% if company.losses? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.turnover == 'true' %>
+    <% if company.turnover? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.lack_information == 'true' %>
+    <% if company.lack_information? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.unrelated_function == 'true' %>
+    <% if company.unrelated_function? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.unrelated_activity == 'true' %>
+    <% if company.unrelated_activity? %>
     <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
     <% end %>
-    <% if company.group == 'true' %>
+    <% if company.group? %>
     <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
     <% else %>
     <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
@@ -1035,21 +1035,30 @@
    </Row>
    <% @accepted_companies.each do |company| %>
    <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s143"/>
-    <Cell ss:StyleID="s143"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s143"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s143"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s143"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s143"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s158"/>
-    <Cell ss:StyleID="s158"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s158"/>
-    <Cell ss:StyleID="s162"><Data ss:Type="String"></Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s136"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+    <Cell ss:StyleID="s137"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
+    <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+    <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+    <Cell ss:StyleID="s138"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_3 %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_2 %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_1 %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_3 %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_2 %></Data></Cell>
+    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_1 %></Data></Cell>
+    <% if @project_version.pli == "ROS" %>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_3 %></Data></Cell>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_2 %></Data></Cell>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_1 %></Data></Cell>
+    <Cell ss:StyleID="s240"><Data
+      ss:Type="Number"><%= company.ros_avg %></Data></Cell>
+    <% else %>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_3 %></Data></Cell>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_2 %></Data></Cell>
+    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_1 %></Data></Cell>
+    <Cell ss:StyleID="s240"><Data
+      ss:Type="Number"><%= company.fcmu_avg %></Data></Cell>
+    <% end %>
    </Row>
    <% end %>
    <Row ss:Index="8" ss:AutoFitHeight="0" ss:Height="40">
@@ -1061,45 +1070,61 @@
     <Cell ss:StyleID="s204"><Data ss:Type="Number">2011</Data></Cell>
     <Cell ss:StyleID="s124"><Data ss:Type="String">W/A</Data></Cell>
    </Row>
-   <Row ss:AutoFitHeight="0">
+<Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868560"><Data
       ss:Type="String">Maximum</Data></Cell>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s195"/>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s195" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868580"><Data
       ss:Type="String">3rd Quartile</Data></Cell>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s197"/>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+      ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868600"><Data
       ss:Type="String">Median</Data></Cell>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s197"/>
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s251" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+      ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868640"><Data
       ss:Type="String">1st Quartile</Data></Cell>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s196"/>
-    <Cell ss:StyleID="s197"/>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+      ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868620"><Data
       ss:Type="String">Minimum</Data></Cell>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s194"/>
-    <Cell ss:StyleID="s195"/>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+      ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s195" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+      ss:Type="Number"></Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">

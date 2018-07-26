@@ -5,9 +5,9 @@ class Company < ApplicationRecord
 
   def self.import(file, project_version_id)
     spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(2)
-    (3..spreadsheet.last_row).each do |i|
-      row=Hash[[header,spreadsheet.row(i)].transpose]
+    header = spreadsheet.sheet(1).row(2)
+    (3..spreadsheet.sheet(1).last_row).each do |i|
+      row=Hash[[header,spreadsheet.sheet(1).row(i)].transpose]
       unless Company.exists?(project_version_id: project_version_id.to_i, "BvD ID number": row["BvD ID number"])
         company = Company.new
         company.project_version_id = project_version_id.to_i

@@ -128,16 +128,6 @@
         <p>Accepted companies: <%=accepted_companies.count%></p>
         <p>Rejected companies: <%=project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
       </div>
-      <div class="container-actions-project-versions-title">
-        <h3>Financial results</h4>
-      </div>
-      <div class="container-actions-project-versions-results">
-        <p>Min: <%=project_version.companies.count%></p>
-        <p>Q1: <%=unset_companies.count%></p>
-        <p>Median: <%=accepted_companies.count%></p>
-        <p>Q3: <%=project_version.companies.count - accepted_companies.count - unset_companies.count%></p>
-        <p>Max:</p>
-      </div>
     </div>
 
   </div>

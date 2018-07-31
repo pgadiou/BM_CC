@@ -5,7 +5,7 @@ class Company < ApplicationRecord
 
   def self.import(file, project_version_id)
     spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.sheet(1).row(2)
+    header = spreadsheet.sheet(1).row(1)
     (3..spreadsheet.sheet(1).last_row).each do |i|
       row=Hash[[header,spreadsheet.sheet(1).row(i)].transpose]
       unless Company.exists?(project_version_id: project_version_id.to_i, "BvD ID number": row["BvD ID number"])
@@ -14,12 +14,12 @@ class Company < ApplicationRecord
         company.attributes = row.to_hash.slice(*Company.attribute_names)
         company.trade_description_en = row.to_hash["Trade description (English)"]
         company.trade_description_original = row.to_hash["Trade description (original language)"]
-        company.turnover_year_1 = row.to_hash["Turnover #{company.project_version.year_1}"]
-        company.turnover_year_2 = row.to_hash["Turnover #{company.project_version.year_2}"]
-        company.turnover_year_3 = row.to_hash["Turnover #{company.project_version.year_3}"]
-        company.EBIT_year_1 = row.to_hash["EBIT #{company.project_version.year_1}"]
-        company.EBIT_year_2 = row.to_hash["EBIT #{company.project_version.year_2}"]
-        company.EBIT_year_3 = row.to_hash["EBIT #{company.project_version.year_3}"]
+        company.turnover_year_1 = row.to_hash["Operating revenue (Turnover)\nth EUR\n#{company.project_version.year_1}"]
+        company.turnover_year_2 = row.to_hash["Operating revenue (Turnover)\nth EUR\n#{company.project_version.year_2}"]
+        company.turnover_year_3 = row.to_hash["Operating revenue (Turnover)\nth EUR\n#{company.project_version.year_3}"]
+        company.EBIT_year_1 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_1}"]
+        company.EBIT_year_2 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_2}"]
+        company.EBIT_year_3 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_3}"]
 
         sum_EBIT = 0
         sum_turnover = 0

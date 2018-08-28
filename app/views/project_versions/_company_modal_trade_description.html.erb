@@ -127,7 +127,7 @@
           </div>
           <div class="modal-body-company-button-container">
 
-            <% if company.unrelated_function && company.accepted_for_internet_review == 'false' %>
+            <% if company.unrelated_function %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :unrelated_function, value: false %>
@@ -146,7 +146,7 @@
           </div>
           <div class="modal-body-company-button-container">
 
-            <% if company.unrelated_activity && company.accepted_for_internet_review == 'false' %>
+            <% if company.unrelated_activity %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :unrelated_activity, value: false %>
@@ -165,7 +165,7 @@
           </div>
           <div class="modal-body-company-button-container">
 
-            <% if company.group && company.accepted_for_internet_review == 'false' %>
+            <% if company.group %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :group, value: false %>
@@ -184,7 +184,7 @@
           </div>
           <div class="modal-body-company-button-container">
 
-            <% if company.lack_information && company.accepted_for_internet_review == 'false'%>
+            <% if company.lack_information %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
                 <%= f.hidden_field :lack_information, value: false %>
@@ -210,6 +210,8 @@
             </a>
           </div>
         </div>
+      </div>
+      <div class="modal-footer">
       </div>
     </div>
   </div>

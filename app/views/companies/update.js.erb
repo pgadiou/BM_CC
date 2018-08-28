@@ -9,17 +9,25 @@ function refreshCompany(companyHTML, companyDIV) {
   parentDiv.innerHTML = companyHTML;
 }
 
+function refreshcompanyCount(companycountHTML, companycountDIV) {
+  const companycountBox = document.getElementById(companycountDIV);
+  companycountBox.innerHTML = companycountHTML;
+}
+
 function refreshResults(resultsHTML, resultsDIV) {
-  const resultsBox = document.getElementById(resultsDIV);
+  const resultsBox = document.getElementsByClassName(resultsDIV)[0];
   resultsBox.innerHTML = resultsHTML;
 }
 
+
 <% if @project_version.open_tab == 'Trade description review' %>
-  refreshResults('<%= j render "project_versions/trade_description_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>', 'trade-description-results-box');
+  refreshcompanyCount('<%= j render "project_versions/trade_description_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>', 'trade-description-results-box');
+  refreshResults('<%= j render "project_versions/pli_results", ros_results_final: @ros_results_final %>', 'final-sample-pli-results-wrapper');
   refreshCompany('<%= j render "companies/trade_description_company_show", company: @company %>', '<%=@company.id%>-trade-description-show');
   refreshModal('<%= j render "companies/company_details_trade_description", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>', '<%=@company.id%>-trade-description-modal');
 <% elsif @project_version.open_tab == 'Internet review' %>
-  refreshResults('<%= j render "project_versions/internet_review_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_internet_review: @unset_companies_internet_review, project_version: @project_version, accepted_companies: @accepted_companies %>', 'internet-review-results-box');
+  refreshcompanyCount('<%= j render "project_versions/internet_review_results_box", accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_internet_review: @unset_companies_internet_review, project_version: @project_version, accepted_companies: @accepted_companies %>', 'internet-review-results-box');
+  refreshResults('<%= j render "project_versions/pli_results", ros_results_final: @ros_results_final %>', 'final-sample-pli-results-wrapper');
   refreshCompany('<%= j render "companies/internet_review_company_show", company: @company %>', '<%=@company.id%>-internet-review-show');
   refreshModal('<%= j render "companies/company_details_internet_review", company: @company, project_version: @project_version, next_company: @next_company, previous_company: @previous_company %>', '<%=@company.id%>-internet-review-modal');
 <% end %>

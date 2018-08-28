@@ -6,10 +6,8 @@
  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
-  <Author>Philippe Gadiou</Author>
-  <LastAuthor>Philippe Gadiou</LastAuthor>
-  <Created>2018-07-06T07:49:14Z</Created>
-  <LastSaved>2018-07-15T09:31:54Z</LastSaved>
+  <Author>User</Author>
+  <LastAuthor>User</LastAuthor>
   <Version>16.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -752,10 +750,9 @@
   <Names>
    <NamedRange ss:Name="Print_Titles" ss:RefersTo="='Rejection Matrix'!R2:R3"/>
   </Names>
-  <Table ss:ExpandedColumnCount="14" ss:ExpandedRowCount="18" x:FullColumns="1"
-   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="16">
+  <Table ss:DefaultColumnWidth="65" ss:DefaultRowHeight="16">
    <Column ss:AutoFitWidth="0" ss:Width="16"/>
-   <Column ss:AutoFitWidth="0" ss:Width="116"/>
+   <Column ss:AutoFitWidth="0" ss:Width="230"/>
    <Column ss:AutoFitWidth="0" ss:Width="84" ss:Span="2"/>
    <Column ss:Index="6" ss:AutoFitWidth="0" ss:Width="147"/>
    <Column ss:AutoFitWidth="0" ss:Width="245" ss:Span="1"/>
@@ -797,172 +794,158 @@
       ss:Type="String">Accepted companies</Data></Cell>
    </Row>
    <% @accepted_companies.each do |company| %>
-   <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
-   </Row>
+     <Row ss:AutoFitHeight="0" ss:Height="44" ss:StyleID="s84">
+      <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["BvD ID number"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
+     </Row>
    <% end %>
    <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
     <Cell ss:Index="2" ss:MergeAcross="12" ss:StyleID="m105553120065928"><Data
       ss:Type="String">Rejected After Internet Review</Data></Cell>
    </Row>
    <% @rejected_internet_review.each do |company| %>
-   <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <% if company.losses? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.turnover? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.lack_information? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_function? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_activity? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.group? %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-   </Row>
+     <Row ss:AutoFitHeight="0" ss:Height="44" ss:StyleID="s84">
+      <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["BvD ID number"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
+      <% if company.losses? %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.turnover? %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.lack_information? %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.unrelated_function? %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.unrelated_activity? %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.group? %>
+      <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+      <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+     </Row>
    <% end %>
    <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
     <Cell ss:Index="2" ss:MergeAcross="12" ss:StyleID="m105553120065928"><Data
       ss:Type="String">Rejected After Trade Description Review</Data></Cell>
    </Row>
    <% @rejected_trade_description_review.each do |company| %>
-   <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <% if company.losses? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.turnover? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.lack_information? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_function? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_activity? %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.group? %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-   </Row>
+     <Row ss:AutoFitHeight="0" ss:Height="44" ss:StyleID="s84">
+      <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["BvD ID number"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
+      <% if company.losses? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.turnover? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.lack_information? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.unrelated_function? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.unrelated_activity? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.group? %>
+        <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+     </Row>
    <% end %>
    <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
     <Cell ss:Index="2" ss:MergeAcross="12" ss:StyleID="m105553120065928"><Data
       ss:Type="String">Rejected After Financial Filters</Data></Cell>
    </Row>
    <% @rejected_financial_filters.each do |company| %>
-   <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
-    <% if company.losses == 'true' %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.turnover == 'true' %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.lack_information == 'true' %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_function == 'true' %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.unrelated_activity == 'true' %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-    <% if company.group == 'true' %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String">x</Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
-    <% end %>
-   </Row>
+     <Row ss:AutoFitHeight="0" ss:Height="44" ss:StyleID="s84">
+      <Cell ss:Index="2" ss:StyleID="s125"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["BvD ID number"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+      <Cell ss:StyleID="s93"><Data ss:Type="String"><%= company.Website %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+      <Cell ss:StyleID="s94"><Data ss:Type="String"><%= company.trade_description_original %></Data></Cell>
+      <% if company.losses? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.turnover? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <% if company.lack_information? %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String">x</Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <% end %>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s95"><Data ss:Type="String"></Data></Cell>
+      <Cell ss:StyleID="s126"><Data ss:Type="String"></Data></Cell>
+     </Row>
    <% end %>
-   <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="6" ss:StyleID="s102"/>
-   </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
    <PageSetup>
     <Layout x:Orientation="Landscape" x:CenterHorizontal="1"/>
     <Header x:Margin="0.3"
-     x:Data="&amp;L&amp;&quot;Helvetica,Normal&quot;first version PG&#10;Fahim Entreprises&amp;R&amp;&quot;Helvetica,Normal&quot;Rejection Matrix"/>
+     x:Data="&amp;L&amp;&quot;Helvetica,Normal&quot;<%=@project_version.project.description%>&#10;<%=@project_version.project.client%>&amp;R&amp;&quot;Helvetica,Normal&quot;Rejection Matrix"/>
     <Footer x:Margin="0.3" x:Data="&amp;C&amp;&quot;Calibri,Normal&quot;&amp;K000000&amp;P/&amp;N"/>
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
    <FitToPage/>
    <Print>
+    <FitHeight><%=((@accepted_companies.count + @rejected_internet_review.count + @rejected_trade_description_review.count + @rejected_financial_filters.count)/20) %> </FitHeight>
     <ValidPrinterInfo/>
     <PaperSizeIndex>9</PaperSizeIndex>
     <Scale>52</Scale>
@@ -971,10 +954,10 @@
    <DoNotDisplayGridlines/>
    <Panes>
     <Pane>
-     <Number>3</Number>
+<!--      <Number>3</Number>
      <ActiveRow>3</ActiveRow>
      <ActiveCol>1</ActiveCol>
-     <RangeSelection>R4C2:R4C14</RangeSelection>
+     <RangeSelection>R4C2:R4C14</RangeSelection> -->
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
@@ -985,8 +968,7 @@
   <Names>
    <NamedRange ss:Name="Print_Titles" ss:RefersTo="='Financial Analysis'!R2:R3"/>
   </Names>
-  <Table ss:ExpandedColumnCount="16" ss:ExpandedRowCount="14" x:FullColumns="1"
-   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="16">
+  <Table ss:DefaultColumnWidth="65" ss:DefaultRowHeight="16">
    <Column ss:AutoFitWidth="0" ss:Width="7"/>
    <Column ss:AutoFitWidth="0" ss:Width="116"/>
    <Column ss:AutoFitWidth="0" ss:Width="84" ss:Span="2"/>
@@ -1034,34 +1016,32 @@
       ss:Name="Print_Titles"/></Cell>
    </Row>
    <% @accepted_companies.each do |company| %>
-   <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
-    <Cell ss:Index="2" ss:StyleID="s136"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
-    <Cell ss:StyleID="s137"><Data ss:Type="Number"><%= company["BvD ID number"] %></Data></Cell>
-    <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
-    <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
-    <Cell ss:StyleID="s138"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_3 %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_2 %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_1 %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_3 %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_2 %></Data></Cell>
-    <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_1 %></Data></Cell>
-    <% if @project_version.pli == "ROS" %>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_3 %></Data></Cell>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_2 %></Data></Cell>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_1 %></Data></Cell>
-    <Cell ss:StyleID="s240"><Data
-      ss:Type="Number"><%= company.ros_avg %></Data></Cell>
-    <% else %>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_3 %></Data></Cell>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_2 %></Data></Cell>
-    <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_1 %></Data></Cell>
-    <Cell ss:StyleID="s240"><Data
-      ss:Type="Number"><%= company.fcmu_avg %></Data></Cell>
-    <% end %>
-   </Row>
+     <Row ss:AutoFitHeight="0" ss:Height="40" ss:StyleID="s84">
+      <Cell ss:Index="2" ss:StyleID="s136"><Data ss:Type="String"><%= company["Company name"] %></Data></Cell>
+      <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["BvD ID number"] %></Data></Cell>
+      <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["Country"] %></Data></Cell>
+      <Cell ss:StyleID="s137"><Data ss:Type="String"><%= company["NACE / NAF code"] %></Data></Cell>
+      <Cell ss:StyleID="s138"><Data ss:Type="String"><%= company.trade_description_en %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_3 %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_2 %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.turnover_year_1 %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_3 %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_2 %></Data></Cell>
+      <Cell ss:StyleID="s254"><Data ss:Type="Number"><%= company.EBIT_year_1 %></Data></Cell>
+      <% if @project_version.pli == "ROS" %>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_3 %></Data></Cell>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_2 %></Data></Cell>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.ros_1 %></Data></Cell>
+        <Cell ss:StyleID="s240"><Data ss:Type="Number"><%= company.ros_avg %></Data></Cell>
+      <% else %>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_3 %></Data></Cell>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_2 %></Data></Cell>
+        <Cell ss:StyleID="s239"><Data ss:Type="Number"><%= company.fcmu_1 %></Data></Cell>
+        <Cell ss:StyleID="s240"><Data ss:Type="Number"><%= company.fcmu_avg %></Data></Cell>
+      <% end %>
+     </Row>
    <% end %>
-   <Row ss:Index="8" ss:AutoFitHeight="0" ss:Height="40">
+   <Row ss:Index="<%=@accepted_companies.count+6%>" ss:AutoFitHeight="0" ss:Height="40">
     <Cell ss:Index="13" ss:MergeAcross="3" ss:StyleID="s205"><Data ss:Type="String">Final sample PLI results</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:Height="40">
@@ -1070,60 +1050,60 @@
     <Cell ss:StyleID="s204"><Data ss:Type="Number">2011</Data></Cell>
     <Cell ss:StyleID="s124"><Data ss:Type="String">W/A</Data></Cell>
    </Row>
-<Row ss:AutoFitHeight="0">
+  <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868560"><Data
       ss:Type="String">Maximum</Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s195" ss:Formula="=MIN(R[-6]C:R[-4]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MAX(R[-<%=@accepted_companies.count+4%>]C:R[-5]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MAX(R[-<%=@accepted_companies.count+4%>]C:R[-5]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s194" ss:Formula="=MAX(R[-<%=@accepted_companies.count+4%>]C:R[-5]C)"><Data ss:Type="Number"></Data></Cell>
+    <Cell ss:StyleID="s195" ss:Formula="=MAX(R[-<%=@accepted_companies.count+4%>]C:R[-5]C)"><Data ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868580"><Data
       ss:Type="String">3rd Quartile</Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+5%>]C:R[-6]C,3)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+5%>]C:R[-6]C,3)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+5%>]C:R[-6]C,3)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-7]C:R[-5]C,3)"><Data
+    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+5%>]C:R[-6]C,3)"><Data
       ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868600"><Data
       ss:Type="String">Median</Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-<%=@accepted_companies.count+6%>]C:R[-7]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-<%=@accepted_companies.count+6%>]C:R[-7]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=MEDIAN(R[-<%=@accepted_companies.count+6%>]C:R[-7]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s251" ss:Formula="=MEDIAN(R[-8]C:R[-6]C)"><Data
+    <Cell ss:StyleID="s251" ss:Formula="=MEDIAN(R[-<%=@accepted_companies.count+6%>]C:R[-7]C)"><Data
       ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868640"><Data
       ss:Type="String">1st Quartile</Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+7%>]C:R[-8]C,1)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+7%>]C:R[-8]C,1)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+    <Cell ss:StyleID="s250" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+7%>]C:R[-8]C,1)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-9]C:R[-7]C,1)"><Data
+    <Cell ss:StyleID="s251" ss:Formula="=QUARTILE(R[-<%=@accepted_companies.count+7%>]C:R[-8]C,1)"><Data
       ss:Type="Number"></Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="11" ss:MergeAcross="1" ss:StyleID="m106102877868620"><Data
       ss:Type="String">Minimum</Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-<%=@accepted_companies.count+8%>]C:R[-9]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-<%=@accepted_companies.count+8%>]C:R[-9]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+    <Cell ss:StyleID="s194" ss:Formula="=MIN(R[-<%=@accepted_companies.count+8%>]C:R[-9]C)"><Data
       ss:Type="Number"></Data></Cell>
-    <Cell ss:StyleID="s195" ss:Formula="=MIN(R[-10]C:R[-8]C)"><Data
+    <Cell ss:StyleID="s195" ss:Formula="=MIN(R[-<%=@accepted_companies.count+8%>]C:R[-9]C)"><Data
       ss:Type="Number"></Data></Cell>
    </Row>
   </Table>
@@ -1131,7 +1111,7 @@
    <PageSetup>
     <Layout x:Orientation="Landscape" x:CenterHorizontal="1"/>
     <Header x:Margin="0.3"
-     x:Data="&amp;L&amp;&quot;Helvetica,Normal&quot;first version PG&#10;Fahim Entreprises&amp;R&amp;&quot;Helvetica,Normal&quot;Financial Analysis"/>
+     x:Data="&amp;L&amp;&quot;Helvetica,Normal&quot;<%=@project_version.project.description%>&#10;<%=@project_version.project.client%>&amp;R&amp;&quot;Helvetica,Normal&quot;Financial Analysis"/>
     <Footer x:Margin="0.3" x:Data="&amp;C&amp;&quot;Calibri,Normal&quot;&amp;K000000&amp;P/&amp;N"/>
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>

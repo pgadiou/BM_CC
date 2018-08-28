@@ -17,7 +17,7 @@
     </div>
   </div>
   <% unless @ros_results_final.empty? %>
-    <div class="final-sample-pli-results-container">
+    <div class="final-sample-pli-results-wrapper">
       <div class="final-sample-pli-results-item">
         <h4>Max</h4>
         <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
@@ -69,7 +69,7 @@
             <p><%=project_version.year_1%>-<%=project_version.year_3%></p>
           </div>
           <div class="project-version-content-detail-created">
-            <p><%=project_version.created_at.strftime('%F')%></p>
+            <p><%=project_version.created_at.strftime('%d/%m/%Y')%></p>
           </div>
         </div>
       </div>
@@ -89,22 +89,22 @@
             <%= submit_tag "Import Excel"%>
           <% end %>
 
-          <form method="POST" action="#" enctype="multipart/form-data">
+<!--           <form method="POST" action="#" enctype="multipart/form-data"> -->
             <!-- COMPONENT START -->
-            <div class="form-group">
+<!--             <div class="form-group">
               <div class="input-group input-file" name="Fichier1">
                 <input type="text" class="form-control" placeholder='Choose a file...' />
                 <span class="input-group-btn">
                   <button class="btn btn-default btn-choose" type="button">Choose</button>
                 </span>
               </div>
-            </div>
+            </div> -->
             <!-- COMPONENT END -->
-            <div class="form-group">
+<!--             <div class="form-group">
               <button type="submit" class="btn btn-primary pull-right" disabled>Submit</button>
               <button type="reset" class="btn btn-danger">Reset</button>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
 
@@ -113,7 +113,7 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">Create new version</button>
         </div>
         <div class="btn-group mr-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-primary">Select other version</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#selectProjectVersionModal'>Select other version </button>
         </div>
       </div>
     </div>

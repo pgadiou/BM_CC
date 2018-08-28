@@ -6,6 +6,7 @@
 .modal-content-company-details {
   background-color: white;
   padding:0 30px;
+  overflow:scroll;
 }
 
 .modal-body-item-title {
@@ -40,6 +41,7 @@
 .wrapper-company-modal-infos {
 display: flex;
 padding-bottom: 10px;
+height: 80vh;
 }
 
 

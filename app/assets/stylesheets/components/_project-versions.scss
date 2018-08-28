@@ -12,10 +12,14 @@
   }
 }
 
-.final-sample-pli-results-container {
+.final-sample-pli-results-wrapper {
   display:flex;
   margin-right:50px;
   margin-left: auto;
+}
+
+.final-sample-pli-results-container {
+  display:flex;
 }
 
 .final-sample-pli-results-item {

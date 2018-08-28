@@ -1,0 +1,24 @@
+<% unless ros_results_final.empty? %>
+  <div class="final-sample-pli-results-container">
+    <div class="final-sample-pli-results-item">
+      <h4>Max</h4>
+      <p><%=number_to_percentage(ros_results_final.max * 100, precision: 2)%></p>
+    </div>
+    <div class="final-sample-pli-results-item">
+      <h4>Q3</h4>
+      <p><%=number_to_percentage(ros_results_final.percentile(75) * 100, precision: 2)%></p>
+      </div>
+    <div class="final-sample-pli-results-item">
+      <h4>Median</h4>
+      <p><%=number_to_percentage(ros_results_final.median * 100, precision: 2)%></p>
+    </div>
+    <div class="final-sample-pli-results-item">
+      <h4>Q1</h4>
+      <p><%=number_to_percentage(ros_results_final.percentile(25) * 100, precision: 2)%></p>
+    </div>
+    <div class="final-sample-pli-results-item">
+      <h4>Min</h4>
+      <p><%=number_to_percentage(ros_results_final.min * 100, precision: 2)%></p>
+    </div>
+  </div>
+<% end %>

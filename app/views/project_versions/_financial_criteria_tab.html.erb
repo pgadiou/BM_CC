@@ -12,12 +12,12 @@
     <div class="btn-group mr-2" role="group" aria-label="Fourth group">
       <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
     </div>
-    <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+<!--     <div class="btn-group mr-2" role="group" aria-label="Fifth group">
       <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-    </div>
+    </div> -->
   </div>
   <% unless @ros_results_final.empty? %>
-    <div class="final-sample-pli-results-container">
+    <div class="final-sample-pli-results-wrapper">
       <div class="final-sample-pli-results-item">
         <h4>Max</h4>
         <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
@@ -45,249 +45,258 @@
   <!-- Financial criteria -->
   <div class="wrapper-project-versions" id="financial-criteria">
 
-    <div class="container-content-companies-financial-criteria">
+    <div class="container-content-companies-financial-criteria-wrapper">
 
-      <div class="companies-financial-criteria-content-detail">
-        <div class="companies-financial-criteria-content-detail-title">
-          <div class="companies-financial-criteria-content-detail-name">
-            <h4>Company</h4>
+      <div class="container-content-companies-financial-criteria">
+
+        <div class="companies-financial-criteria-content-detail">
+
+          <div class="companies-financial-criteria-content-detail">
+            <div class="companies-financial-criteria-content-detail-title">
+              <div class="companies-financial-criteria-content-detail-name">
+                <h4>Company</h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-BvD">
+                <h4>BvD ID</h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Turnover <br> <%=project_version.year_3%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Turnover <br> <%=project_version.year_2%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Turnover <br> <%=project_version.year_1%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>EBIT <br> <%=project_version.year_3%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>EBIT <br> <%=project_version.year_2%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>EBIT <br> <%=project_version.year_1%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>ROS <br> <%=project_version.year_3%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>ROS <br> <%=project_version.year_2%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>ROS <br> <%=project_version.year_1%></h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>ROS <br> W/A</h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Rejected <br> Losses</h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Rejected <br> Lack data</h4>
+              </div>
+              <div class="companies-financial-criteria-content-detail-financials">
+                <h4>Rejected <br> Turnover</h4>
+              </div>
+            </div>
+
+            <%project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
+
+              <% unless company.losses || company.turnover || company.lack_financials %>
+
+                <div class="companies-financial-criteria-content-detail-current">
+                  <div class="companies-financial-criteria-content-detail-name">
+                    <p><%=company["Company name"]%></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-BvD">
+                    <p><%=company["BvD ID number"]%></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+
+                  <% if project_version.pli == 'ROS' %>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                      <% if company.ros_3 %>
+                        <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_2 %>
+                        <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_1 %>
+                        <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_avg %>
+                        <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+
+                  <% elsif project_version.pli == 'FCMU' %>
+
+                    <div class="companies-financial-criteria-content-detail-financials">
+                      <% if company.fcmu_3 %>
+                        <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_2 %>
+                        <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_1 %>
+                        <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_avg %>
+                        <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.losses == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.lack_financials == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.turnover == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                </div>
+
+              <% else %>
+
+                <div class="companies-financial-criteria-content-detail-current-rejected">
+                  <div class="companies-financial-criteria-content-detail-name">
+                    <p><%=company["Company name"]%></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-BvD">
+                    <p><%=company["BvD ID number"]%></p>
+                  </div>
+
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
+                  </div>
+
+                  <% if project_version.pli == 'ROS' %>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                      <% if company.ros_3 %>
+                        <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_2 %>
+                        <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_1 %>
+                        <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.ros_avg %>
+                        <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+
+                  <% elsif project_version.pli == 'FCMU' %>
+
+                    <div class="companies-financial-criteria-content-detail-financials">
+                      <% if company.fcmu_3 %>
+                        <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_2 %>
+                        <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_1 %>
+                        <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+                    <div class="companies-financial-criteria-content-detail-financials">
+                     <% if company.fcmu_avg %>
+                        <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.losses == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.lack_financials == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                  <div class="companies-financial-criteria-content-detail-financials">
+                    <% if company.turnover == true %>
+                      <p>x</p>
+                    <% end %>
+                  </div>
+                </div>
+
+              <% end %>
+
+            <% end %>
+
           </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>BvD ID</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> <%=project_version.year_3%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> <%=project_version.year_2%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Turnover <br> <%=project_version.year_1%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> <%=project_version.year_3%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> <%=project_version.year_2%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>EBIT <br> <%=project_version.year_1%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> <%=project_version.year_3%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> <%=project_version.year_2%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> <%=project_version.year_1%></h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>ROS <br> W/A</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Rejected <br> Losses</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Rejected <br> Lack data</h4>
-          </div>
-          <div class="companies-financial-criteria-content-detail-financials">
-            <h4>Rejected <br> Turnover</h4>
-          </div>
+
         </div>
 
-        <%project_version.companies.sort_by(&:"BvD ID number").each do |company|%>
-
-          <% unless company.losses || company.turnover || company.lack_financials %>
-
-            <div class="companies-financial-criteria-content-detail-current">
-              <div class="companies-financial-criteria-content-detail-name">
-                <p><%=company["Company name"]%></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=company["BvD ID number"]%></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-
-              <% if project_version.pli == 'ROS' %>
-                <div class="companies-financial-criteria-content-detail-financials">
-                  <% if company.ros_3 %>
-                    <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_2 %>
-                    <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_1 %>
-                    <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_avg %>
-                    <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-
-              <% elsif project_version.pli == 'FCMU' %>
-
-                <div class="companies-financial-criteria-content-detail-financials">
-                  <% if company.fcmu_3 %>
-                    <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_2 %>
-                    <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_1 %>
-                    <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_avg %>
-                    <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-
-              <% end %>
-
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.losses == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.lack_financials == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.turnover == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-            </div>
-
-          <% else %>
-
-            <div class="companies-financial-criteria-content-detail-current-rejected">
-              <div class="companies-financial-criteria-content-detail-name">
-                <p><%=company["Company name"]%></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=company["BvD ID number"]%></p>
-              </div>
-
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_3, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_2, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.turnover_year_1, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_3, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_2, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <p><%=number_to_currency(company.EBIT_year_1, unit: "", precision: 0, delimiter: " ") %></p>
-              </div>
-
-              <% if project_version.pli == 'ROS' %>
-                <div class="companies-financial-criteria-content-detail-financials">
-                  <% if company.ros_3 %>
-                    <p><%=number_to_percentage((company.ros_3) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_2 %>
-                    <p><%=number_to_percentage((company.ros_2) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_1 %>
-                    <p><%=number_to_percentage((company.ros_1) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.ros_avg %>
-                    <p><%=number_to_percentage((company.ros_avg) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-
-              <% elsif project_version.pli == 'FCMU' %>
-
-                <div class="companies-financial-criteria-content-detail-financials">
-                  <% if company.fcmu_3 %>
-                    <p><%=number_to_percentage((company.fcmu_3) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_2 %>
-                    <p><%=number_to_percentage((company.fcmu_2) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_1 %>
-                    <p><%=number_to_percentage((company.fcmu_1) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-                <div class="companies-financial-criteria-content-detail-financials">
-                 <% if company.fcmu_avg %>
-                    <p><%=number_to_percentage((company.fcmu_avg) * 100, precision: 2)%></p>
-                  <% end %>
-                </div>
-
-              <% end %>
-
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.losses == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.lack_financials == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-              <div class="companies-financial-criteria-content-detail-financials">
-                <% if company.turnover == true %>
-                  <p>x</p>
-                <% end %>
-              </div>
-            </div>
-
-          <% end %>
-
-        <% end %>
-
       </div>
+
     </div>
 
     <div class="container-actions-financial-criteria">

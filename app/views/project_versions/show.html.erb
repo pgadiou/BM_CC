@@ -28,34 +28,13 @@
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
         <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
       </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
         <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+      </div> -->
     </div>
-    <% unless @ros_results_final.empty? %>
-      <div class="final-sample-pli-results-container">
-        <div class="final-sample-pli-results-item">
-          <h4>Max</h4>
-          <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q3</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Median</h4>
-          <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q1</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Min</h4>
-          <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
-        </div>
-      </div>
-    <% end %>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
+    </div>
   </div>
 
   <!-- Trade description review -->
@@ -128,34 +107,13 @@
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
         <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-primary btn-tab' %>
       </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
         <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+      </div> -->
     </div>
-    <% unless @ros_results_final.empty? %>
-      <div class="final-sample-pli-results-container">
-        <div class="final-sample-pli-results-item">
-          <h4>Max</h4>
-          <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q3</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Median</h4>
-          <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q1</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Min</h4>
-          <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
-        </div>
-      </div>
-    <% end %>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
+    </div>
   </div>
 
   <!-- internet review -->
@@ -229,34 +187,13 @@
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
         <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
       </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
         <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-primary btn-tab' %>
-      </div>
+      </div> -->
     </div>
-    <% unless @ros_results_final.empty? %>
-      <div class="final-sample-pli-results-container">
-        <div class="final-sample-pli-results-item">
-          <h4>Max</h4>
-          <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q3</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Median</h4>
-          <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Q1</h4>
-          <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
-        </div>
-        <div class="final-sample-pli-results-item">
-          <h4>Min</h4>
-          <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
-        </div>
-      </div>
-    <% end %>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
+    </div>
   </div>
 
   <!-- internet review -->
@@ -343,6 +280,46 @@
           <%= f.submit "Ajouter", class: "btn btn-primary" %>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectProjectVersionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="select-project-version-modal-header-wrapper">
+          <div class="select-project-version-modal-header-description">
+            <h4>Version name</h4>
+          </div>
+          <div class="select-project-version-modal-header-year">
+            <h4>Years analyzed</h4>
+          </div>
+          <div class="select-project-version-modal-header-created">
+            <h4>Created on</h4>
+          </div>
+        </div>
+        <%= @project.project_versions.each do |version| %>
+          <div class="select-project-version-modal-project-container">
+            <div class="select-project-version-modal-project-description">
+              <p><%=version.description%></p>
+            </div>
+            <div class="select-project-version-modal-project-year">
+              <p><%=version.year_1%>-<%=version.year_3%></p>
+            </div>
+            <div class="select-project-version-modal-project-created">
+              <p><%=version.created_at.strftime('%d/%m/%Y')%></p>
+            </div>
+          </div>
+        <%end%>
+      </div>
+        <div class="modal-footer">
+        </div>
     </div>
   </div>
 </div>

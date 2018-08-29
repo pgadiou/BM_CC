@@ -291,8 +291,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
         <div class="select-project-version-modal-header-wrapper">
           <div class="select-project-version-modal-header-description">
             <h4>Version name</h4>
@@ -304,20 +302,31 @@
             <h4>Created on</h4>
           </div>
         </div>
-        <%= @project.project_versions.each do |version| %>
-          <div class="select-project-version-modal-project-container">
-            <div class="select-project-version-modal-project-description">
-              <p><%=version.description%></p>
-            </div>
-            <div class="select-project-version-modal-project-year">
-              <p><%=version.year_1%>-<%=version.year_3%></p>
-            </div>
-            <div class="select-project-version-modal-project-created">
-              <p><%=version.created_at.strftime('%d/%m/%Y')%></p>
-            </div>
-          </div>
-        <%end%>
       </div>
+      <div class="modal-body">
+
+        <div class="select-project-version-modal-project-wrapper">
+
+          <% @project.project_versions.each do |version| %>
+            <%= link_to project_version_path(version) do %>
+            <div class="select-project-version-modal-project-container">
+              <div class="select-project-version-modal-project-description">
+                <p><%=version.description%></p>
+              </div>
+              <div class="select-project-version-modal-project-year">
+                <p><%=version.year_1%>-<%=version.year_3%></p>
+              </div>
+              <div class="select-project-version-modal-project-created">
+                <p><%=version.created_at.strftime('%d/%m/%Y')%></p>
+              </div>
+            </div>
+            <%end%>
+          <%end%>
+
+        </div>
+
+      </div>
+
         <div class="modal-footer">
         </div>
     </div>

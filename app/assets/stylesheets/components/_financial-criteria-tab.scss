@@ -6,11 +6,24 @@
   width: 100%;
   margin: 30px;
   padding: 15px;
-  overflow:scroll;
+  overflow:hidden;
+  overflow-x: auto;
+}
+
+.container-content-companies-financial-criteria-title {
+  height:50px;
+  width: 100%;
+  min-width:1200px;
+  padding-right: 10px;
 }
 
 .container-content-companies-financial-criteria {
-  overflow:scroll;
+  height:100%;
+  overflow-y:scroll;
+  overflow-x:visible;
+  width: 100%;
+  min-width:1200px;
+  padding-right: 10px;
 }
 
 .companies-financial-criteria-content-detail {

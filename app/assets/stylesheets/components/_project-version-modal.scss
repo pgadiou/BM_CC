@@ -1,0 +1,63 @@
+.select-project-version-modal-header-wrapper {
+  background: white;
+  width: 100%;
+  padding: 15px;
+  p {
+    font-size: 14px;
+  }
+  display: flex;
+  h4 {
+    font-size: 14px;
+    color: $blue;
+  }
+}
+
+.select-project-version-modal-header-description {
+  width:50%;
+  padding-right: 10px;
+}
+
+.select-project-version-modal-header-year {
+  width:25%;
+  padding-right: 10px;
+}
+
+.select-project-version-modal-header-created {
+  width:25%;
+  padding-right: 10px;
+}
+
+.select-project-version-modal-project-wrapper {
+  a {
+    color: black
+  }
+}
+
+.select-project-version-modal-project-container {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  background: #f4f4f433;
+  transition: all 0.3s ease;
+  width: 100%;
+  padding: 15px;
+  p {
+    font-size: 14px;
+  }
+  display: flex;
+  border-bottom-style: solid;
+  border-color: $light-gray;
+}
+
+.select-project-version-modal-project-description {
+  width:50%;
+  padding-right: 10px;
+}
+
+.select-project-version-modal-project-year {
+  width:25%;
+  padding-right: 10px;
+}
+
+.select-project-version-modal-project-created {
+  width:25%;
+  padding-right: 10px;
+}

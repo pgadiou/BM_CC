@@ -24,6 +24,7 @@ class Company < ApplicationRecord
         company.EBIT_year_1 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_1}"]
         company.EBIT_year_2 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_2}"]
         company.EBIT_year_3 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_3}"]
+        company.Website = row.to_hash["Website address(es)"] if row.to_hash["Website address(es)"]
 
         sum_EBIT = 0
         sum_turnover = 0
@@ -62,6 +63,7 @@ class Company < ApplicationRecord
         company.EBIT_year_1 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_1}"]
         company.EBIT_year_2 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_2}"]
         company.EBIT_year_3 = row.to_hash["Operating P/L [=EBIT]\nth EUR\n#{company.project_version.year_3}"]
+        company.Website = row.to_hash["Website address(es)"] if row.to_hash["Website address(es)"]
 
         sum_EBIT = 0
         sum_turnover = 0

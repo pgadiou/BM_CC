@@ -62,7 +62,13 @@
               <h3>Website</h3>
             </div>
             <div class="modal-body-item-content">
-              <p><%= company["Website"] %></p>
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.text_field :Website, placeholder: company.Website, class: 'website-input', id: "#{company.id}-website-input" %>
+                <%= link_to "http://#{company.Website}/", class: "navbar-wagon-brand", target: :_blank do %>
+                  <i class="fa fa-globe fa-2x"></i>
+                <% end %>
+                <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-website-submit" %>
+              <% end %>
             </div>
           </div>
           <div class="modal-body-company-button-container">

@@ -28,9 +28,12 @@
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
         <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
       </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
-        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-tab' %>
+      </div> -->
+    </div>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
     </div>
   </div>
 
@@ -52,9 +55,6 @@
             </div>
             <div class="companies-trade-description-review-content-detail-text">
               <h4>Country</h4>
-            </div>
-            <div class="companies-trade-description-review-content-detail-text">
-              <h4>Website</h4>
             </div>
             <div class="companies-trade-description-review-content-detail-trade-description">
               <h4>Trade description<br>(English)</h4>
@@ -83,7 +83,7 @@
       </div>
 
     </div>
-    <div class="container-actions-project-versions" id='trade-description-results-box'>
+    <div class="container-actions-trade-description-review" id='trade-description-results-box'>
 
       <%= render 'project_versions/trade_description_results_box', accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_trade_description: @unset_companies_trade_description, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>
 
@@ -107,9 +107,92 @@
       <div class="btn-group mr-2" role="group" aria-label="Fourth group">
         <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-primary btn-tab' %>
       </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
-        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-tab' %>
+      </div> -->
+    </div>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
+    </div>
+  </div>
+
+  <!-- internet review -->
+
+  <div class="wrapper-project-versions" id="internet-review">
+
+    <div class="content-companies-internet-review-wrapper">
+
+      <div class="container-content-companies-internet-review">
+
+
+        <div class="companies-internet-review-content-detail">
+          <div class="companies-internet-review-content-detail-title">
+            <div class="companies-internet-review-content-detail-name">
+              <h4>Company</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-BvD">
+              <h4>BvD ID</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-text">
+              <h4>Country</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-trade-description">
+              <h4>Trade description<br>(English)</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-trade-description">
+              <h4>Trade description<br>(original language)</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-financials">
+              <h4>ROS <br> W/A</h4>
+            </div>
+            <div class="companies-internet-review-content-detail-rejection">
+              <h4>Rejected <br> Manual review</h4>
+            </div>
+
+          </div>
+
+          <%@accepted_companies_for_internet_review.each_with_index do |company, index|%>
+
+            <%= render 'companies/internet_review_company_show', company: company %>
+            <%= render 'project_versions/company_modal_internet_review', company: company, accepted_companies_for_internet_review: @accepted_companies_for_internet_review, index: index, project_version: @project_version %>
+
+          <% end %>
+
+        </div>
+
       </div>
+
+    </div>
+    <div class="container-actions-internet-review" id='internet-review-results-box'>
+
+      <%= render 'project_versions/internet_review_results_box', accepted_companies: @accepted_companies, accepted_companies_for_internet_review: @accepted_companies_for_internet_review, unset_companies_internet_review: @unset_companies_internet_review, project_version: @project_version, accepted_companies_for_manual_review: @accepted_companies_for_manual_review %>
+
+    </div>
+
+  </div>
+
+<% when "Results" %>
+
+  <div class="container-nav-buttons">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <%= button_to "Versions", project_version_mark_open_tab_path(@project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-tab' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <%= button_to "Financial criteria", project_version_mark_open_tab_path(@project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-tab' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <%= button_to "Trade description review", project_version_mark_open_tab_path(@project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+        <%= button_to "Internet review", project_version_mark_open_tab_path(@project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
+      </div>
+<!--       <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <%= button_to "Results", project_version_mark_open_tab_path(@project_version, open_tab: 'Results'), :method => :put, class: 'btn btn-primary btn-tab' %>
+      </div> -->
+    </div>
+    <div class="final-sample-pli-results-wrapper">
+      <%= render 'project_versions/pli_results', ros_results_final: @ros_results_final %>
     </div>
   </div>
 
@@ -189,12 +272,63 @@
       <%= simple_form_for (@new_project_version) do |f| %>
         <div class="modal-body">
           <%= f.input :description, label: 'Version Description', required: true%>
+          <%= f.input :year_1, label: 'Enter first year of period analyzed (i.e. 2011 for 2011-2013)', required: true%>
+          <%= f.input :pli, label: 'Select PLI', required: true, collection: ["ROS", "FMCU"]%>
           <%= f.hidden_field :project_id, :value=> @project_version.project_id %>
         </div>
         <div class="modal-footer">
           <%= f.submit "Ajouter", class: "btn btn-primary" %>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectProjectVersionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="select-project-version-modal-header-wrapper">
+          <div class="select-project-version-modal-header-description">
+            <h4>Version name</h4>
+          </div>
+          <div class="select-project-version-modal-header-year">
+            <h4>Years analyzed</h4>
+          </div>
+          <div class="select-project-version-modal-header-created">
+            <h4>Created on</h4>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <div class="select-project-version-modal-project-wrapper">
+
+          <% @project.project_versions.each do |version| %>
+            <%= link_to project_version_path(version) do %>
+            <div class="select-project-version-modal-project-container">
+              <div class="select-project-version-modal-project-description">
+                <p><%=version.description%></p>
+              </div>
+              <div class="select-project-version-modal-project-year">
+                <p><%=version.year_1%>-<%=version.year_3%></p>
+              </div>
+              <div class="select-project-version-modal-project-created">
+                <p><%=version.created_at.strftime('%d/%m/%Y')%></p>
+              </div>
+            </div>
+            <%end%>
+          <%end%>
+
+        </div>
+
+      </div>
+
+        <div class="modal-footer">
+        </div>
     </div>
   </div>
 </div>

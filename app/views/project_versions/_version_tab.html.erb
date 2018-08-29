@@ -1,22 +1,47 @@
-  <div class="container-nav-buttons">
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group" role="group" aria-label="First group">
-        <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-primary btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Third group">
-        <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fourth group">
-        <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
-      <div class="btn-group mr-2" role="group" aria-label="Fifth group">
-        <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
-      </div>
+<div class="container-nav-buttons">
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group" role="group" aria-label="First group">
+      <%= button_to "Versions", project_version_mark_open_tab_path(project_version, open_tab: 'Versions'), :method => :put, class: 'btn btn-primary btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Second group">
+      <%= button_to "Financial criteria", project_version_mark_open_tab_path(project_version, open_tab: 'Financial criteria'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Third group">
+      <%= button_to "Trade description review", project_version_mark_open_tab_path(project_version, open_tab: 'Trade description review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+      <%= button_to "Internet review", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
+    </div>
+    <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+      <%= button_to "Results", project_version_mark_open_tab_path(project_version, open_tab: 'Internet review'), :method => :put, class: 'btn btn-tab' %>
     </div>
   </div>
+  <% unless @ros_results_final.empty? %>
+    <div class="final-sample-pli-results-wrapper">
+      <div class="final-sample-pli-results-item">
+        <h4>Max</h4>
+        <p><%=number_to_percentage(@ros_results_final.max * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q3</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(75) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Median</h4>
+        <p><%=number_to_percentage(@ros_results_final.median * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Q1</h4>
+        <p><%=number_to_percentage(@ros_results_final.percentile(25) * 100, precision: 2)%></p>
+      </div>
+      <div class="final-sample-pli-results-item">
+        <h4>Min</h4>
+        <p><%=number_to_percentage(@ros_results_final.min * 100, precision: 2)%></p>
+      </div>
+    </div>
+  <% end %>
+
+</div>
 
   <!-- project version -->
   <div class="wrapper-project-versions" id="versions">
@@ -41,10 +66,10 @@
             <p><%=project_version.description%></p>
           </div>
           <div class="project-version-content-detail-period">
-            <p><%=project_version.project.client%></p>
+            <p><%=project_version.year_1%>-<%=project_version.year_3%></p>
           </div>
           <div class="project-version-content-detail-created">
-            <p><%=project_version.created_at.strftime('%F')%></p>
+            <p><%=project_version.created_at.strftime('%d/%m/%Y')%></p>
           </div>
         </div>
       </div>
@@ -64,22 +89,22 @@
             <%= submit_tag "Import Excel"%>
           <% end %>
 
-          <form method="POST" action="#" enctype="multipart/form-data">
+<!--           <form method="POST" action="#" enctype="multipart/form-data"> -->
             <!-- COMPONENT START -->
-            <div class="form-group">
+<!--             <div class="form-group">
               <div class="input-group input-file" name="Fichier1">
                 <input type="text" class="form-control" placeholder='Choose a file...' />
                 <span class="input-group-btn">
                   <button class="btn btn-default btn-choose" type="button">Choose</button>
                 </span>
               </div>
-            </div>
+            </div> -->
             <!-- COMPONENT END -->
-            <div class="form-group">
+<!--             <div class="form-group">
               <button type="submit" class="btn btn-primary pull-right" disabled>Submit</button>
               <button type="reset" class="btn btn-danger">Reset</button>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
 
@@ -88,7 +113,7 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newProjectVersionModal">Create new version</button>
         </div>
         <div class="btn-group mr-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-primary">Select other version</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#selectProjectVersionModal'>Select other version </button>
         </div>
       </div>
     </div>
@@ -102,16 +127,6 @@
         <p>Unset companies: <%=@unset_companies.count%></p>
         <p>Accepted companies: <%=accepted_companies.count%></p>
         <p>Rejected companies: <%=project_version.companies.count - @accepted_companies.count - @unset_companies.count%></p>
-      </div>
-      <div class="container-actions-project-versions-title">
-        <h3>Financial results</h4>
-      </div>
-      <div class="container-actions-project-versions-results">
-        <p>Min: <%=project_version.companies.count%></p>
-        <p>Q1: <%=unset_companies.count%></p>
-        <p>Median: <%=accepted_companies.count%></p>
-        <p>Q3: <%=project_version.companies.count - accepted_companies.count - unset_companies.count%></p>
-        <p>Max:</p>
       </div>
     </div>
 

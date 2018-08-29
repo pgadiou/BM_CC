@@ -10,7 +10,7 @@ class FinancialFiltersController < ApplicationController
       if @new_financial_filter.description == "losses"
         if @new_financial_filter.three_years
           @project_version.companies.each do |company|
-            if (company["EBIT 2011"] < 0) || (company["EBIT 2012"] < 0) || (company["EBIT 2013"] < 0)
+            if (company.EBIT_year_1 < 0) || (company.EBIT_year_2 < 0) || (company.EBIT_year_3 < 0)
               company.losses = true
               company.accepted_for_manual_review = false
               company.save
@@ -18,7 +18,7 @@ class FinancialFiltersController < ApplicationController
           end
         else
           @project_version.companies.each do |company|
-            if ((company["EBIT 2011"] < 0) && (company["EBIT 2012"] < 0)) || ((company["EBIT 2012"] < 0) && (company["EBIT 2013"] < 0))
+            if ((company.EBIT_year_1 < 0) && (company.EBIT_year_2 < 0)) || ((company.EBIT_year_2 < 0) && (company.EBIT_year_3 < 0))
               company.losses = true
               company.accepted_for_manual_review = false
               company.save
@@ -30,7 +30,7 @@ class FinancialFiltersController < ApplicationController
       if @new_financial_filter.description == "turnover"
         if @new_financial_filter.three_years
           @project_version.companies.each do |company|
-            if (company["Turnover 2011"] < @new_financial_filter.minimum_turnover) || (company["Turnover 2012"] < @new_financial_filter.minimum_turnover) || (company["Turnover 2013"] < @new_financial_filter.minimum_turnover)
+            if (company.turnover_year_1 < @new_financial_filter.minimum_turnover) || (company.turnover_year_2 < @new_financial_filter.minimum_turnover) || (company.turnover_year_3 < @new_financial_filter.minimum_turnover)
               company.turnover = true
               company.accepted_for_manual_review = false
               company.save
@@ -38,7 +38,7 @@ class FinancialFiltersController < ApplicationController
           end
         else
           @project_version.companies.each do |company|
-            if ((company["Turnover 2011"] < @new_financial_filter.minimum_turnover) && (company["Turnover 2012"] < @new_financial_filter.minimum_turnover)) || ((company["Turnover 2012"] < @new_financial_filter.minimum_turnover) && (company["Turnover 2013"] < @new_financial_filter.minimum_turnover))
+            if ((company.turnover_year_1 < @new_financial_filter.minimum_turnover) && (company.turnover_year_2 < @new_financial_filter.minimum_turnover)) || ((company.turnover_year_2 < @new_financial_filter.minimum_turnover) && (company.turnover_year_3 < @new_financial_filter.minimum_turnover))
               company.turnover = true
               company.accepted_for_manual_review = false
               company.save
@@ -80,7 +80,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.losses = false
-        unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save
@@ -90,7 +90,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.turnover = false
-        unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save
@@ -100,7 +100,7 @@ class FinancialFiltersController < ApplicationController
 
       @project_version.companies.each do |company|
         company.lack_financials = false
-        unless company.accepted || company.losses || company.turnover || company.lack_financials || company.unrelated_activity || company.lack_information|| company.unrelated_function || company.group
+        unless company.losses || company.turnover || company.lack_financials
           company.accepted_for_manual_review = true
         end
         company.save

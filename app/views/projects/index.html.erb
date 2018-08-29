@@ -20,7 +20,7 @@
 
       <% @projects.each do |project| %>
 
-        <%= link_to project_version_path(project.project_versions.last) do %>
+        <%= link_to project_version_path(project.project_versions.order('updated_at ASC').last) do %>
           <div class="benchmark-content-home-project-instance">
             <div class="benchmark-content-home-project-description">
               <p><%=project.description%></p>
@@ -29,7 +29,7 @@
               <p><%=project.client%></p>
             </div>
             <div class="benchmark-content-home-project-created">
-              <p><%=project.created_at.strftime('%F')%></p>
+              <p><%=project.created_at.strftime('%d/%m/%Y')%></p>
             </div>
           </div>
         <% end %>

@@ -5,7 +5,8 @@ class CompaniesController < ApplicationController
 
   def import
     Company.import(params[:file], params[:project_version_id])
-    redirect_to :back, notice: "Companies imported"
+    @project_version = ProjectVersion.find(params[:project_version_id].to_i)
+    redirect_to project_version_path(@project_version), notice: "Companies imported"
   end
 
   def update
@@ -18,11 +19,9 @@ class CompaniesController < ApplicationController
         @company.unrelated_activity = false
         @company.group = false
         @company.unrelated_function = false
-        @company.unset_internet_review = true
       elsif selection_params[:unrelated_function] == 'true' || selection_params[:unrelated_activity] == 'true' || selection_params[:group] == 'true' || selection_params[:lack_information] == 'true'
         @company.unset_trade_description = false
         @company.accepted_for_internet_review = false
-        @company.unset_internet_review = false
       else
         @company.unset_trade_description = true unless @company.unrelated_function? || @company.unrelated_activity? || @company.group? || @company.lack_information? || @company.accepted_for_internet_review?
       end
@@ -31,6 +30,7 @@ class CompaniesController < ApplicationController
         @company.unrelated_activity = false
         @company.group = false
         @company.unrelated_function = false
+        @company.lack_information = false
         @company.unset_internet_review = false
       elsif selection_params[:unrelated_function] == 'true' || selection_params[:unrelated_activity] == 'true' || selection_params[:group] == 'true' || selection_params[:lack_information] == 'true'
         @company.unset_internet_review = false
@@ -41,6 +41,8 @@ class CompaniesController < ApplicationController
     end
     if @company.save
       define_selection_count
+      define_overall_final_sample_results
+      define_final_pli_results
       define_next_previous_companies(@company)
       respond_to do |format|
         format.html {redirect_to project_version_path(@project_version)}
@@ -89,4 +91,35 @@ class CompaniesController < ApplicationController
     @accepted_companies = Company.where(project_version_id: @project_version.id, accepted: true).sort_by(&:"BvD ID number")
     @unset_companies = @unset_companies_trade_description + @unset_companies_internet_review
   end
+
+  def define_overall_final_sample_results
+    if @accepted_companies.empty?
+      @ros_results_final = []
+      if @unset_companies.empty?
+        @project_version.companies.each do |company|
+          @ros_results_final << company.ros_avg if company.ros_avg
+        end
+      else
+        @unset_companies.each do |company|
+          @ros_results_final << company.ros_avg if company.ros_avg
+        end
+      end
+    else
+      @ros_results_final = []
+      @accepted_companies.each do |company|
+        @ros_results_final << company.ros_avg if company.ros_avg
+      end
+    end
+  end
+
+  def define_final_pli_results
+    @accepted_companies_min = @ros_results_final.min unless @ros_results_final.empty?
+    @accepted_companies_q1 = @ros_results_final.percentile(25) unless @ros_results_final.empty?
+    @accepted_companies_median = @ros_results_final.median unless @ros_results_final.empty?
+    @accepted_companies_q3 = @ros_results_final.percentile(75) unless @ros_results_final.empty?
+    @accepted_companies_max = @ros_results_final.max unless @ros_results_final.empty?
+  end
+
+
+
 end

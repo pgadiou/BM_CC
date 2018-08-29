@@ -52,7 +52,13 @@
               <h3>Website</h3>
             </div>
             <div class="modal-body-item-content">
-              <p><%= company["Website"] %></p>
+              <%= form_for([project_version, company], remote: true) do |f| %>
+                <%= f.text_field :Website, placeholder: company.Website, class: 'website-input', id: "#{company.id}-website-input" %>
+                <%= link_to "http://#{company.Website}/", class: "navbar-wagon-brand", target: :_blank do %>
+                  <i class="fa fa-globe fa-2x"></i>
+                <% end %>
+                <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-website-submit" %>
+              <% end %>
             </div>
           </div>
           <div class="modal-body-company-button-container">
@@ -82,7 +88,11 @@
             </div>
             <div class="modal-body-item-content">
               <p><%= company.trade_description_original %></p>
+              <a href="https://translate.google.fr/?hl=fr#auto/en/<%=company.trade_description_original%>" target="_blank">To English (Google Translate)</a>
             </div>
+            <div class="modal-body-item-translation">
+            </div>
+
           </div>
           <div class="modal-body-item-container">
             <div class="modal-body-item-title">
@@ -91,7 +101,7 @@
             <div class="modal-body-item-content">
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.text_field :trade_description_en, placeholder: company.trade_description_en, class: 'trade-description-input', id: "#{company.id}-trade-description-english-input" %>
+                <%= f.text_area :trade_description_en, as: :text, placeholder: company.trade_description_en, class: 'trade-description-input', id: "#{company.id}-trade-description-english-input" %>
                 <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-trade-description-english-submit" %>
               <% end %>
             </div>
@@ -103,7 +113,7 @@
             <div class="modal-body-item-content">
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.text_field :comment, placeholder: company.comment, class: 'comment-input', id: "#{company.id}-comment-input" %>
+                <%= f.text_area :comment, as: :text, placeholder: company.comment, class: 'comment-input', id: "#{company.id}-comment-input" %>
                 <%= f.submit 'save changes', class: 'hidden', id: "#{company.id}-comment-submit" %>
               <% end %>
             </div>
@@ -170,14 +180,14 @@
             <% if company.lack_information %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :group, value: false %>
+                <%= f.hidden_field :lack_information, value: false %>
                 <%= f.submit 'Insufficient info', class: 'btn btn-primary btn-company-modal-pushed' %>
               <% end %>
 
             <% else %>
 
               <%= form_for([project_version, company], remote: true) do |f| %>
-                <%= f.hidden_field :group, value: true %>
+                <%= f.hidden_field :lack_information, value: true %>
                 <%= f.submit 'Insufficient info', class: 'btn btn-primary btn-company-modal' %>
               <% end %>
 
@@ -193,9 +203,6 @@
             </a>
           </div>
         </div>
-      </div>
-
-      <div class="modal-body-company" id="trade-description-english">
       </div>
       <div class="modal-footer">
       </div>

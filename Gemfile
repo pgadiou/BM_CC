@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'roo'
 gem 'gon'
+gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -1,0 +1,100 @@
+.modal-dialog-company {
+  width: 50vw;
+  margin: 20vh auto;
+  position: relative;
+}
+
+.modal-content-company-details {
+  background-color: white;
+  padding:0 30px;
+}
+
+.modal-body-item-title {
+  h3 {
+    font-size: 16px;
+    color: $blue;
+    }
+}
+
+.modal-body-item-content {
+  p {
+    font-size: 12px;
+  }
+  a {
+    font-size: 12px;
+    text-decoration: underline;
+    color: #469ae0b5;
+  }
+}
+
+.modal-body-item-translation {
+  a {
+    font-size: 12px;
+    text-decoration: underline;
+  }
+}
+
+.modal-body-company-button-container {
+  padding-top: 10px;
+}
+
+.wrapper-company-modal-infos {
+display: flex;
+padding-bottom: 10px;
+}
+
+
+.wrapper-company-items {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.wrapper-company-trade-descriptions {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.modal-previous-container {
+  width:30px;
+  margin-right: 30px;
+  position: relative;
+}
+
+.modal-previous-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-next-container {
+  width:30px;
+  margin-left: 30px;
+  position: relative;
+}
+
+.modal-next-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#company_trade_description_en {
+  min-height: 20px;
+}
+
+.trade-description-input{
+  min-height: 60px;
+  width: 90%;
+  font-size: 12px;
+}
+
+.comment-input{
+  min-height: 60px;
+  width: 90%;
+  font-size: 12px;
+  resize  : none;
+  overflow: auto;
+  vertical-align: top;
+}

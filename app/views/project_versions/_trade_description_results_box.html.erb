@@ -1,0 +1,13 @@
+
+  <div class="container-actions-project-versions-title">
+    <h3>Companies Selection</h3>
+  </div>
+  <div class="container-actions-project-versions-results">
+    <p>Total number of companies: <%=accepted_companies_for_manual_review.count%></p>
+    <p>Unset: <%=unset_companies_trade_description.count%></p>
+    <p>Accepted: <%=accepted_companies_for_internet_review.count%></p>
+    <p>Rejected: <%=accepted_companies_for_manual_review.count - accepted_companies_for_internet_review.count - unset_companies_trade_description.count%></p>
+  </div>
+  <div class="container-actions-project-versions-title">
+    <h3>Financial results</h3>
+  </div>
